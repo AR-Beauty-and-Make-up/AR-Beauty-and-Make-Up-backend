@@ -1,6 +1,6 @@
-package model
+package ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model
 
-import builders.TurnBuilder
+import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.builders.TurnBuilder
 import org.junit.Assert
 import org.junit.Test
 import java.time.LocalDateTime
