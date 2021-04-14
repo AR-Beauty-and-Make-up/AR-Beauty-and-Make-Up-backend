@@ -1,6 +1,6 @@
-package builders
+package ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.builders
 
-import model.Turn
+import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.Turn
 import java.time.LocalDateTime
 
 class TurnBuilder {
