@@ -28,4 +28,11 @@ class TurnTest {
         val aService = "Masajes"
         Assert.assertEquals(aTurn.service(), aService)
     }
+
+    @Test
+    fun aTurnHasAClientContactNumber(){
+        val aTurn = TurnBuilder.aTurn().build()
+        val aNumber = 1168686868
+        Assert.assertEquals(aTurn.contactNumber(), aNumber)
+    }
 }
