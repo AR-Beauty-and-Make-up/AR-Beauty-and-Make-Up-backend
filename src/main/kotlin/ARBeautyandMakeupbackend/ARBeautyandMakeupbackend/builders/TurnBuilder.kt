@@ -2,6 +2,7 @@ package ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.builders
 
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.Turn
 import java.time.LocalDateTime
+import java.util.*
 
 class TurnBuilder {
 
@@ -14,6 +15,17 @@ class TurnBuilder {
         fun aTurn(): TurnBuilder {
             return TurnBuilder()
         }
+
+        fun turnList(): List<Turn> {
+            var aTurn = aTurn().build()
+            var anotherTurn = aTurn().withName("Luciana Alonso").build()
+            return Arrays.asList(aTurn, anotherTurn)
+        }
+    }
+
+    private fun withName(name: String): TurnBuilder {
+        client = name
+        return this
     }
 
     fun build(): Turn {
