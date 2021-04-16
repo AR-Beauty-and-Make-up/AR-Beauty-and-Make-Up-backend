@@ -8,7 +8,7 @@ import javax.persistence.Id
 
 
 @Entity
-open class Turn(client: String, aDate: LocalDateTime, aService: String) {
+open class Turn(client: String, aDate: LocalDateTime, aService: String, aNumber: Int) {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,6 +16,7 @@ open class Turn(client: String, aDate: LocalDateTime, aService: String) {
     open var date: LocalDateTime = aDate
     open var clientName: String = client
     open var service: String = aService
+    open var contactNumber: Int = aNumber
 
     fun date(): LocalDateTime {
         return this.date
@@ -27,6 +28,10 @@ open class Turn(client: String, aDate: LocalDateTime, aService: String) {
 
     fun service(): String {
         return this.service
+    }
+
+    fun contactNumber(): Int {
+        return this.contactNumber
     }
 
 }
