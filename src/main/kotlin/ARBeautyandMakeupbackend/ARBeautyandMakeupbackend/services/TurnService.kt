@@ -14,4 +14,8 @@ class TurnService : ITurnService{
     override fun getTurns(): List<Turn> {
         return turnRepository.findAll()
     }
+
+    override fun addTurn(aTurn: Turn) {
+        turnRepository.save(aTurn)
+    }
 }
