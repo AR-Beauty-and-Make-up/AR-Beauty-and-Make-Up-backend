@@ -8,15 +8,34 @@ import javax.persistence.Id
 
 
 @Entity
-open class Turn(client: String, aDate: LocalDateTime, aService: String, aNumber: Int) {
-
+open class Turn{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    open var id: Long? = null
-    open var date: LocalDateTime = aDate
-    open var clientName: String = client
-    open var service: String = aService
-    open var contactNumber: Int = aNumber
+    open var id: Long?
+    open var date: LocalDateTime
+    open var clientName: String
+    open var service: String
+    open var contactNumber: Int
+
+
+    constructor(client: String, aDate: LocalDateTime, aService: String, aNumber: Int) {
+        this.id = null
+        this.date = aDate
+        this.clientName = client
+        this.service = aService
+        this.contactNumber = aNumber
+
+    }
+
+    constructor(id: Long?, client: String, aDate: LocalDateTime, aService: String, aNumber: Int)  {
+        this.id = id
+        this.date = aDate
+        this.clientName = client
+        this.service = aService
+        this.contactNumber = aNumber
+    }
+
+
 
     fun date(): LocalDateTime {
         return this.date
