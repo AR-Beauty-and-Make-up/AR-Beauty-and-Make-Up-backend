@@ -11,6 +11,7 @@ import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.services.TurnService
 import org.junit.runner.RunWith
 import org.mockito.junit.MockitoJUnitRunner
 import org.springframework.boot.test.context.SpringBootTest
+import java.time.LocalDate
 import java.time.LocalDateTime
 import java.util.*
 
@@ -52,10 +53,11 @@ class TurnServiceTest {
 
     @Test
     fun whenWeAskTurnServiceForAllTheTurnsByDateReturnAListOfTurn() {
-        var aDate =  LocalDateTime.now()
-        var aListOfTurnByDate = TurnBuilder.turnListBySameDate(aDate)
-        `when`(turnRepositoryMock.findAllByDate(aDate)).thenReturn(aListOfTurnByDate)
+        val aDate =  LocalDateTime.now()
+        val aListOfTurnByDate = TurnBuilder.turnListBySameDate(aDate)
+        val aLocalDate = LocalDate.of(aDate.year, aDate.month, aDate.dayOfMonth)
+        `when`(turnRepositoryMock.findAllByDate(aLocalDate)).thenReturn(aListOfTurnByDate)
 
-        Assert.assertEquals(aListOfTurnByDate.size, turnService.findAllByDate(aDate).size)
+        Assert.assertEquals(aListOfTurnByDate.size, turnService.findAllByDate(aLocalDate).size)
     }
 }

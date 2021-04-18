@@ -13,6 +13,7 @@ import org.springframework.test.context.junit4.SpringRunner
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers
+import java.time.LocalDateTime
 
 
 @SpringBootTest
@@ -35,4 +36,13 @@ class TurnControllerTest {
             .andExpect(MockMvcResultMatchers.status().isOk)
     }
 
+    @Test
+    fun ifWeAskForTurnsWithASpeceificDateWeGetTheAllTurnsWithThatDate(){
+        var date =LocalDateTime.of(2021, 4, 20, 16, 0)
+        var turnsWithDate = TurnBuilder.turnListBySameDate(date)
+        `when`(turnServiceMock.getTurns()).thenReturn(turnsWithDate)
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/turns/{date}"))
+            .andExpect(MockMvcResultMatchers.status().isOk)
+    }
 }
