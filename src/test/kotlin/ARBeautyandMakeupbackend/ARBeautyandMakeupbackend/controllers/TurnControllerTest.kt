@@ -36,13 +36,5 @@ class TurnControllerTest {
             .andExpect(MockMvcResultMatchers.status().isOk)
     }
 
-    @Test
-    fun ifWeAskForTurnsWithASpeceificDateWeGetTheAllTurnsWithThatDate(){
-        var date =LocalDateTime.of(2021, 4, 20, 16, 0)
-        var turnsWithDate = TurnBuilder.turnListBySameDate(date)
-        `when`(turnServiceMock.getTurns()).thenReturn(turnsWithDate)
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/turns/{date}"))
-            .andExpect(MockMvcResultMatchers.status().isOk)
-    }
 }
