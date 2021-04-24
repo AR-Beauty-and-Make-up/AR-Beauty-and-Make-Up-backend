@@ -36,6 +36,9 @@ open class Turn{
     }
 
 
+    fun id(): Long? {
+        return this.id
+    }
 
     fun date(): LocalDateTime {
         return this.date
@@ -51,6 +54,27 @@ open class Turn{
 
     fun contactNumber(): Int {
         return this.contactNumber
+    }
+
+
+    fun changeClientName(newName: String){
+        this.clientName = newName
+    }
+
+    fun changeDate(newDate: LocalDateTime) {
+        this.date = newDate
+    }
+
+    fun changeService(newService: String) {
+        this.service = newService
+    }
+
+    fun changeId(newId: Long){
+        this.id = newId
+    }
+
+    fun changeContactNumber(newNumber: Int) {
+        this.contactNumber = newNumber
     }
 
 }

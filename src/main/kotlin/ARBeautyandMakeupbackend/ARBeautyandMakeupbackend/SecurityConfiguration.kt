@@ -14,6 +14,8 @@ class SecurityConfiguration : WebSecurityConfigurerAdapter() {
                 .antMatchers("/**")
                 .permitAll().and()
                 .formLogin()
+        http.cors().and().csrf().disable();
 
     }
+
 }

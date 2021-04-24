@@ -5,7 +5,6 @@ import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.persistence.TurnReposit
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import java.time.LocalDate
-import java.time.LocalDateTime
 
 @Service
 class TurnService : ITurnService{
@@ -27,5 +26,16 @@ class TurnService : ITurnService{
 
     override fun findAllByDate(date: LocalDate): List<Turn> {
         return turnRepository.findAllByDate(date)
+    }
+
+    override fun updateTurn(id: Long, aTurn: Turn): Turn {
+        val retrievedTurn: Turn = this.find(id)
+
+        retrievedTurn.changeClientName(aTurn.clientName())
+        //retrievedTurn.changeDate(aTurn.date())
+        retrievedTurn.changeService(aTurn.service())
+        retrievedTurn.changeContactNumber(aTurn.contactNumber())
+
+        return turnRepository.save(retrievedTurn)
     }
 }
