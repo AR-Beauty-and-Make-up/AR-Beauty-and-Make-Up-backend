@@ -2,6 +2,7 @@ package ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.controllers
 
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.Turn
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.services.TurnService
+import com.fasterxml.jackson.databind.JsonNode
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration
 import org.springframework.format.annotation.DateTimeFormat
@@ -9,6 +10,13 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import java.time.LocalDate
+import java.time.LocalDateTime
+
+import java.time.format.DateTimeFormatter
+
+
+
+
 
 @RestController
 @EnableAutoConfiguration
@@ -34,4 +42,19 @@ class TurnController {
 
         return response
     }
+
+    @PostMapping("/turn")
+    fun createTurn(@RequestBody aTurn: JsonNode): HttpStatus {
+        var dateTime = aTurn["date"].toString().filterNot { it == '"' }
+
+
+        var newTurn = Turn(aTurn["name"].toString(), LocalDateTime.parse(dateTime), aTurn["service"].toString(), aTurn["tel"].asInt())
+        turnService.addTurn(newTurn)
+
+        return HttpStatus.OK
+    }
+
+
+
+
 }
