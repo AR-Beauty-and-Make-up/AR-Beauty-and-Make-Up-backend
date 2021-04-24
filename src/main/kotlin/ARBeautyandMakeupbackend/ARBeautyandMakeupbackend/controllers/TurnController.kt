@@ -48,7 +48,7 @@ class TurnController {
         var dateTime = aTurn["date"].toString().filterNot { it == '"' }
 
 
-        var newTurn = Turn(aTurn["name"].toString(), LocalDateTime.parse(dateTime), aTurn["service"].toString(), aTurn["tel"].asInt())
+        var newTurn = Turn(aTurn["name"].toString().filterNot { it == '"' }, LocalDateTime.parse(dateTime), aTurn["service"].toString().filterNot { it == '"' }, aTurn["tel"].asInt())
         turnService.addTurn(newTurn)
 
         return HttpStatus.OK
