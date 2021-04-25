@@ -6,9 +6,9 @@ import org.junit.Assert
 import org.junit.Test
 import org.mockito.InjectMocks
 import org.mockito.Mock
-import org.mockito.Mockito.`when`
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.services.TurnService
 import org.junit.runner.RunWith
+import org.mockito.Mockito.*
 import org.mockito.junit.MockitoJUnitRunner
 import org.springframework.boot.test.context.SpringBootTest
 import java.time.LocalDate
@@ -59,5 +59,20 @@ class TurnServiceTest {
         `when`(turnRepositoryMock.findAllByDate(aLocalDate)).thenReturn(aListOfTurnByDate)
 
         Assert.assertEquals(aListOfTurnByDate.size, turnService.findAllByDate(aLocalDate).size)
+    }
+
+    @Test
+    fun aTurnCanHaveItDataUpdated(){
+        val newService = "Masoterapia"
+        var id = Random().nextLong()
+        var aTurn = TurnBuilder.aTurn().withId(id).build()
+        var updatedTurn = TurnBuilder.aTurn().withService(newService).build()
+
+        `when`(turnRepositoryMock.findById(anyLong())).thenReturn(Optional.of(aTurn))
+        `when`(turnRepositoryMock.save(aTurn)).thenReturn(updatedTurn)
+
+        var retrievedTurn = turnService.updateTurn(aTurn.id()!!, updatedTurn)
+        Assert.assertEquals(retrievedTurn.service(), newService)
+
     }
 }
