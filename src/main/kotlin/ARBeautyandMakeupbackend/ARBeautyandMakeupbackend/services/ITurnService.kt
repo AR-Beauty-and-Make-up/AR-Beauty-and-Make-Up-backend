@@ -10,4 +10,5 @@ interface ITurnService {
     fun find(id: Long): Turn
     fun findAllByDate(date: LocalDate): List<Turn>
     fun updateTurn(id: Long, aTurn: Turn): Turn
+    fun deleteTurn(aTurn: Turn)
 }

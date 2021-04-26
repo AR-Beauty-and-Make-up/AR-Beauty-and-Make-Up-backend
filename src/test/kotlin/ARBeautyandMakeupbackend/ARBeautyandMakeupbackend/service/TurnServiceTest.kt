@@ -75,4 +75,18 @@ class TurnServiceTest {
         Assert.assertEquals(retrievedTurn.service(), newService)
 
     }
+
+    @Test
+    fun whenWeDeleteATurnItsDeleteFromTheList(){
+        var id = Random().nextLong()
+        var aTurn = TurnBuilder.aTurn().withId(id).build()
+
+        `when`(turnRepositoryMock.save(aTurn)).thenReturn(aTurn)
+        `when`(turnRepositoryMock.findById(anyLong())).thenReturn(Optional.of(aTurn))
+
+        turnService.deleteTurn(aTurn)
+        var turnList = turnService.getTurns()
+
+        Assert.assertFalse(turnList.contains(aTurn))
+    }
 }

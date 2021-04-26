@@ -38,4 +38,8 @@ class TurnService : ITurnService{
 
         return turnRepository.save(retrievedTurn)
     }
+
+    override fun deleteTurn(aTurn: Turn) {
+        turnRepository.delete(aTurn)
+    }
 }
