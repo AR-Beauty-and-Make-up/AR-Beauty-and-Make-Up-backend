@@ -32,7 +32,7 @@ class TurnService : ITurnService{
         val retrievedTurn: Turn = this.find(id)
 
         retrievedTurn.changeClientName(aTurn.clientName())
-        //retrievedTurn.changeDate(aTurn.date())
+        retrievedTurn.changeDate(aTurn.date())
         retrievedTurn.changeService(aTurn.service())
         retrievedTurn.changeContactNumber(aTurn.contactNumber())
 
