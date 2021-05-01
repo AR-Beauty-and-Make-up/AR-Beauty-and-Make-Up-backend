@@ -60,7 +60,9 @@ class TurnController {
     }
 
     @DeleteMapping("turns/delete/{id}")
-    fun deleteTurn(@RequestBody aTurn: Turn, @PathVariable("id") id: String): ResponseEntity<Turn>{
+    fun deleteTurn(@PathVariable("id") id: String): ResponseEntity<Turn>{
+        var turnId = id.toLong()
+        var aTurn = turnService.find(turnId)
         turnService.deleteTurn(aTurn)
 
         return ResponseEntity.status(HttpStatus.OK).body(aTurn)
