@@ -1,8 +1,7 @@
 package ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.builders
 
-import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.Turn
+import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.turn.Turn
 import java.time.LocalDateTime
-import java.util.*
 
 class TurnBuilder {
 
@@ -48,6 +47,11 @@ class TurnBuilder {
 
     fun withService(service: String): TurnBuilder {
         this.service = service
+        return this
+    }
+
+    fun withContactClient(contactNumber: Int): TurnBuilder {
+        this.contactNumber = contactNumber
         return this
     }
 
