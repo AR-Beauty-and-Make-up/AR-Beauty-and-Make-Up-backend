@@ -1,4 +1,4 @@
-package ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model
+package ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.turn
 
 import java.time.LocalDateTime
 import javax.persistence.Entity
