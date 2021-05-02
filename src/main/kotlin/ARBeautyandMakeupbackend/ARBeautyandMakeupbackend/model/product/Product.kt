@@ -1,7 +1,15 @@
 package ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.product
 
+import javax.persistence.Entity
+import javax.persistence.GeneratedValue
+import javax.persistence.GenerationType
+import javax.persistence.Id
+
+@Entity
 open class Product {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     open var id: Long?
     open var name: String
     open var price: Double
