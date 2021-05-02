@@ -8,12 +8,14 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration
 import org.springframework.format.annotation.DateTimeFormat
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.transaction.annotation.Transactional
 import org.springframework.web.bind.annotation.*
 import java.time.LocalDate
 import java.time.LocalDateTime
 
 
 @RestController
+@Transactional
 @EnableAutoConfiguration
 @CrossOrigin(origins = ["*"], allowedHeaders = ["*"])
 class TurnController {
@@ -47,6 +49,23 @@ class TurnController {
         turnService.addTurn(newTurn)
 
         return HttpStatus.OK
+    }
+
+    @PutMapping("turns/{id}")
+    fun updateTurn(@RequestBody aTurn: Turn, @PathVariable("id") id: String): ResponseEntity<Turn>{
+        var turnId = id.toLong()
+        var turnToUpdate = turnService.updateTurn(turnId, aTurn)
+
+        return ResponseEntity.status(HttpStatus.OK).body(turnToUpdate)
+    }
+
+    @DeleteMapping("turns/delete/{id}")
+    fun deleteTurn(@PathVariable("id") id: String): ResponseEntity<Turn>{
+        var turnId = id.toLong()
+        var aTurn = turnService.find(turnId)
+        turnService.deleteTurn(aTurn)
+
+        return ResponseEntity.status(HttpStatus.OK).body(aTurn)
     }
 
 

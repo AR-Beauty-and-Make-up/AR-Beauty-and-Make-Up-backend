@@ -1,19 +1,21 @@
 package ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.service
 
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.builders.TurnBuilder
+import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.turn.Turn
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.persistence.TurnRepository
+import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.services.TurnService
 import org.junit.Assert
 import org.junit.Test
+import org.junit.runner.RunWith
 import org.mockito.InjectMocks
 import org.mockito.Mock
-import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.services.TurnService
-import org.junit.runner.RunWith
 import org.mockito.Mockito.*
 import org.mockito.junit.MockitoJUnitRunner
 import org.springframework.boot.test.context.SpringBootTest
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.util.*
+
 
 @SpringBootTest
 @RunWith(MockitoJUnitRunner::class)
@@ -82,11 +84,14 @@ class TurnServiceTest {
         var aTurn = TurnBuilder.aTurn().withId(id).build()
 
         `when`(turnRepositoryMock.save(aTurn)).thenReturn(aTurn)
-        `when`(turnRepositoryMock.findById(anyLong())).thenReturn(Optional.of(aTurn))
+
+        turnService.addTurn(aTurn)
+        var turnList = listOf<Turn>(aTurn)
+
 
         turnService.deleteTurn(aTurn)
-        var turnList = turnService.getTurns()
+        var turnListWithoutATurn = listOf<Turn>()
 
-        Assert.assertFalse(turnList.contains(aTurn))
+        Assert.assertNotEquals(turnList.size, turnListWithoutATurn.size)
     }
 }
