@@ -50,8 +50,8 @@ class ProductBuilder {
         return this
     }
 
-    fun withId(id: Long): ProductBuilder {
-        this.id = id
+    fun withId(anId: Long): ProductBuilder {
+        this.id = anId
         return this
     }
 
