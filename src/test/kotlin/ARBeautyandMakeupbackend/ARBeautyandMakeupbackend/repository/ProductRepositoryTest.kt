@@ -38,4 +38,19 @@ class ProductRepositoryTest {
         Assert.assertEquals(2, retrievedProductList.size)
     }
 
+    @Test
+    fun whenWeAskForAllProductsWithACategoryProductsRepositoryReturnsAListWithAllProductsWithThatCategory(){
+        val cateogry ="Cremas"
+        val aProduct = ProductBuilder.aProduct().build()
+        val anotherProduct = ProductBuilder.aProduct().withName("Agua Micelar").build()
+        val productWithDiferentCategory = ProductBuilder.aProduct().withCategory("Maquillaje").build()
+        productRepository.save(productWithDiferentCategory)
+        productRepository.save(aProduct)
+        productRepository.save(anotherProduct)
+
+        val retrievedProductList = productRepository.findAllByACategory(cateogry)
+        Assert.assertEquals(2, retrievedProductList.size)
+        Assert.assertFalse(retrievedProductList.contains(productWithDiferentCategory))
+    }
+
 }

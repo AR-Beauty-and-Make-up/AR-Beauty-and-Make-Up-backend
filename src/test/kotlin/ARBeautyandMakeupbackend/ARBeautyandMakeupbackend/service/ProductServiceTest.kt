@@ -1,7 +1,6 @@
 package ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.service
 
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.builders.ProductBuilder
-import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.builders.TurnBuilder
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.persistence.ProductRepository
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.services.ProductService
 import org.junit.Assert
@@ -12,8 +11,6 @@ import org.mockito.Mock
 import org.mockito.Mockito.`when`
 import org.mockito.junit.MockitoJUnitRunner
 import org.springframework.boot.test.context.SpringBootTest
-import java.time.LocalDate
-import java.time.LocalDateTime
 import java.util.*
 
 
