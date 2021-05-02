@@ -1,7 +1,7 @@
 package ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.service
 
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.builders.TurnBuilder
-import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.Turn
+import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.turn.Turn
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.persistence.TurnRepository
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.services.TurnService
 import org.junit.Assert
