@@ -1,9 +1,17 @@
 package ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.product
 
+import javax.persistence.Entity
+import javax.persistence.GeneratedValue
+import javax.persistence.GenerationType
+import javax.persistence.Id
+
+@Entity
 open class Product {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     open var id: Long?
-    open var name: String
+    open var productName: String
     open var price: Double
     open var category: String
     open var photo: String
@@ -11,7 +19,7 @@ open class Product {
 
     constructor(name: String, price: Double, category: String, photo: String) {
         this.id = null
-        this.name = name
+        this.productName = name
         this.price = price
         this.category = category
         this.photo = photo
@@ -19,14 +27,14 @@ open class Product {
 
     constructor(id: Long, name: String, price: Double, category: String, photo: String) {
         this.id = id
-        this.name = name
+        this.productName = name
         this.price = price
         this.category = category
         this.photo = photo
     }
 
-    fun name() : String {
-        return this.name
+    fun productName() : String {
+        return this.productName
     }
 
     fun price(): Double {

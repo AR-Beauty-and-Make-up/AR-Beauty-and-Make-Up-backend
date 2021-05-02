@@ -1,6 +1,5 @@
 
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.builders.ProductBuilder
-import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.product.Product
 import org.junit.Assert
 import org.junit.Test
 
@@ -12,7 +11,7 @@ class ProductTest {
     fun aProductHasAName(){
         val aName = "Crema desmaquillante"
         val aProduct = ProductBuilder.aProduct().withName(aName).build()
-        Assert.assertEquals(aProduct.name(), aName)
+        Assert.assertEquals(aProduct.productName(), aName)
     }
 
     @Test
