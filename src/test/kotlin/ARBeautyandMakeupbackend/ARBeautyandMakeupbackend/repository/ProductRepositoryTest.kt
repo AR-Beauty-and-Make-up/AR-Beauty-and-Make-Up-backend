@@ -23,7 +23,7 @@ class ProductRepositoryTest {
 
         val retrievedProduct = productRepository.findById(aProduct.id!!).get()
 
-        Assert.assertEquals(aProduct.name(), retrievedProduct.name())
+        Assert.assertEquals(aProduct.productName(), retrievedProduct.productName())
 
     }
 
