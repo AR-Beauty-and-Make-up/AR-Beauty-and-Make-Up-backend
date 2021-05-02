@@ -1,6 +1,6 @@
 package ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.controllers
 
-import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.Turn
+import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.turn.Turn
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.services.TurnService
 import com.fasterxml.jackson.databind.JsonNode
 import org.springframework.beans.factory.annotation.Autowired

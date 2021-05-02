@@ -1,6 +1,6 @@
 package ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.services
 
-import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.Turn
+import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.turn.Turn
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.persistence.TurnRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service

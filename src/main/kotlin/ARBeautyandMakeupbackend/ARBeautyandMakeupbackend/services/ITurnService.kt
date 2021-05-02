@@ -1,6 +1,6 @@
 package ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.services
 
-import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.Turn
+import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.turn.Turn
 import java.time.LocalDate
 
 interface ITurnService {
