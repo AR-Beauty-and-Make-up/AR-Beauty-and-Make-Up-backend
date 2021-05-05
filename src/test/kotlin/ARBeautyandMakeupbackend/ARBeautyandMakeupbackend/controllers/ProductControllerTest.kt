@@ -1,6 +1,7 @@
 package ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.controllers
 
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.builders.ProductBuilder
+import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.category.Category
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.services.ProductService
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -35,4 +36,14 @@ class ProductControllerTest {
             .andExpect(MockMvcResultMatchers.status().isOk)
     }
 
+    /*
+    @Test
+    fun ifWeAskForProductsOfASpecificCategoryWeGetTheoOnlyProductsWithThatCategory(){
+        var allProducts = ProductBuilder.productListWithDifrentCategory()
+        `when`(productServiceMock.findAllByACategory(Category.Cremas)).thenReturn(allProducts)
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/products/Cremas"))
+                .andExpect(MockMvcResultMatchers.status().isOk)
+    }
+    */
 }

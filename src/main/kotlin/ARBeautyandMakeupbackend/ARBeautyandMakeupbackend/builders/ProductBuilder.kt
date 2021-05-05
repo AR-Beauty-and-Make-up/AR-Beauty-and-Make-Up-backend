@@ -1,5 +1,6 @@
 package ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.builders
 
+import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.category.Category
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.product.Product
 
 class ProductBuilder {
@@ -7,7 +8,7 @@ class ProductBuilder {
     private var id:Long? = null
     private var name:String = "Crema desmasquillante"
     private var price:Double = 100.00
-    private var category:String = "Cremas"
+    private var category:Category = Category.Cremas
     private var photo:String = ""
 
 
@@ -21,7 +22,7 @@ class ProductBuilder {
         }
 
         fun productListWithDifrentCategory(): List<Product> {
-            return listOf(aProduct().build(), aProduct().withName("Sombra para ojos negra").withCategory("Maquillaje").build())
+            return listOf(aProduct().build(), aProduct().withName("Sombra para ojos negra").withCategory(Category.Maquillaje).build())
         }
 
     }
@@ -36,11 +37,11 @@ class ProductBuilder {
     }
 
     fun withPrice(aPrice: Double): ProductBuilder {
-        this.price = price
+        this.price = aPrice
         return this
     }
 
-    fun withCategory(aCategory: String): ProductBuilder {
+    fun withCategory(aCategory: Category): ProductBuilder {
         this.category = aCategory
         return this
     }

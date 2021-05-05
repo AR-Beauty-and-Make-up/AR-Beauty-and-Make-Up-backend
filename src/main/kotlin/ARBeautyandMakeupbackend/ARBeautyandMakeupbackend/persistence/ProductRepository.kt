@@ -10,4 +10,7 @@ interface ProductRepository : JpaRepository<Product, Long> {
 
     @Query(value = "SELECT * FROM PRODUCT product WHERE product.category = :aCategory", nativeQuery = true)
     fun findAllByACategory(aCategory: String): List<Product>
+
+    @Query(value = "SELECT DISTINCT Category FROM PRODUCT", nativeQuery = true)
+    fun findAllCategories(): List<String>
 }

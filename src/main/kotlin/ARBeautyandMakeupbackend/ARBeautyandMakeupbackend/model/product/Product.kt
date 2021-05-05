@@ -1,9 +1,7 @@
 package ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.product
 
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
+import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.category.Category
+import javax.persistence.*
 
 @Entity
 open class Product {
@@ -13,11 +11,13 @@ open class Product {
     open var id: Long?
     open var productName: String
     open var price: Double
-    open var category: String
+
+    @Enumerated(EnumType.STRING)
+    open var category: Category
     open var photo: String
 
 
-    constructor(name: String, price: Double, category: String, photo: String) {
+    constructor(name: String, price: Double, category: Category, photo: String) {
         this.id = null
         this.productName = name
         this.price = price
@@ -25,7 +25,7 @@ open class Product {
         this.photo = photo
     }
 
-    constructor(id: Long, name: String, price: Double, category: String, photo: String) {
+    constructor(id: Long, name: String, price: Double, category: Category, photo: String) {
         this.id = id
         this.productName = name
         this.price = price
@@ -41,7 +41,7 @@ open class Product {
         return this.price
     }
 
-    fun category(): String {
+    fun category(): Category {
         return  this.category
     }
 

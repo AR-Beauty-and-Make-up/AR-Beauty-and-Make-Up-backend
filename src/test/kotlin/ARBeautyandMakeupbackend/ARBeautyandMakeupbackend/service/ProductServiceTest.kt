@@ -1,6 +1,7 @@
 package ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.service
 
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.builders.ProductBuilder
+import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.category.Category
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.persistence.ProductRepository
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.services.ProductService
 import org.junit.Assert
@@ -54,7 +55,15 @@ class ProductServiceTest {
         val listOfProductsWithDifrentCategory = ProductBuilder.productListWithDifrentCategory()
         `when`(productRepositoryMock.findAllByACategory("Cremas")).thenReturn(listOfProductsWithDifrentCategory)
 
-        Assert.assertEquals(listOfProductsWithDifrentCategory.size, productService.findAllByACategory("Cremas").size)
+        Assert.assertEquals(listOfProductsWithDifrentCategory.size, productService.findAllByACategory(Category.Cremas).size)
+    }
+
+    @Test
+    fun whenWeAskProductServiceForAllCategoriesReturnsAListOfString() {
+        val listOfStringCategories = listOf("Cremas", "Maquillaje")
+        `when`(productRepositoryMock.findAllCategories()).thenReturn(listOfStringCategories)
+
+        Assert.assertEquals(listOfStringCategories.size, productService.getCategories().size)
     }
 
 }

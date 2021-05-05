@@ -1,5 +1,6 @@
 
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.builders.ProductBuilder
+import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.category.Category
 import org.junit.Assert
 import org.junit.Test
 
@@ -23,7 +24,7 @@ class ProductTest {
 
     @Test
     fun aProductHasACategory(){
-        val aCategory = "Cremas"
+        val aCategory = Category.Cremas
         val aProduct = ProductBuilder.aProduct().withCategory(aCategory).build()
         Assert.assertEquals(aProduct.category(), aCategory)
     }

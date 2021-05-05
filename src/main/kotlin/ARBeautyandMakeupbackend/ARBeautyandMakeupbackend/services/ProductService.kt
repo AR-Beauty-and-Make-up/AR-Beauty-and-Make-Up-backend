@@ -1,5 +1,6 @@
 package ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.services
 
+import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.category.Category
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.product.Product
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.persistence.ProductRepository
 import org.springframework.beans.factory.annotation.Autowired
@@ -23,8 +24,12 @@ class ProductService {
         return productRepository.findById(id).get()
     }
 
-    fun findAllByACategory(aCategory: String): List<Product> {
-        return productRepository.findAllByACategory(aCategory)
+    fun findAllByACategory(aCategory: Category): List<Product> {
+        return productRepository.findAllByACategory(aCategory.toString())
+    }
+
+    fun getCategories(): List<String> {
+        return productRepository.findAllCategories()
     }
 
 }
