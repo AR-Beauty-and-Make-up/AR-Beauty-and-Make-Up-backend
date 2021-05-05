@@ -1,13 +1,11 @@
 package ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.turn
 
 import java.time.LocalDateTime
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
+import javax.persistence.*
 
 
 @Entity
+@Table(uniqueConstraints=arrayOf(UniqueConstraint(columnNames=arrayOf("date"))))
 open class Turn{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
