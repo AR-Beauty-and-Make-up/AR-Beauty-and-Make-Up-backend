@@ -23,6 +23,7 @@ class TurnController {
     @Autowired
     lateinit var turnService: TurnService
 
+
     @GetMapping("/turns")
     fun getTurns(): ResponseEntity<List<Turn>> {
 
@@ -67,8 +68,6 @@ class TurnController {
 
         return ResponseEntity.status(HttpStatus.OK).body(aTurn)
     }
-
-
 
 
 }

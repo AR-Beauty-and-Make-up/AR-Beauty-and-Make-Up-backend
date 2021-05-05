@@ -1,6 +1,7 @@
 package ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.repository
 
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.builders.ProductBuilder
+import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.category.Category
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.persistence.ProductRepository
 import org.junit.Assert
 import org.junit.Test
@@ -43,7 +44,7 @@ class ProductRepositoryTest {
         val cateogry ="Cremas"
         val aProduct = ProductBuilder.aProduct().build()
         val anotherProduct = ProductBuilder.aProduct().withName("Agua Micelar").build()
-        val productWithDiferentCategory = ProductBuilder.aProduct().withCategory("Maquillaje").build()
+        val productWithDiferentCategory = ProductBuilder.aProduct().withCategory(Category.Maquillaje).build()
         productRepository.save(productWithDiferentCategory)
         productRepository.save(aProduct)
         productRepository.save(anotherProduct)
@@ -51,6 +52,19 @@ class ProductRepositoryTest {
         val retrievedProductList = productRepository.findAllByACategory(cateogry)
         Assert.assertEquals(2, retrievedProductList.size)
         Assert.assertFalse(retrievedProductList.contains(productWithDiferentCategory))
+    }
+
+    @Test
+    fun whenWeAskForAllCategoryProductsRepositoryReturnsAListWithAllCategories(){
+        val product = ProductBuilder.aProduct().withCategory(Category.Maquillaje).build()
+        val productWithDiferentCategory = ProductBuilder.aProduct().withCategory(Category.Cremas).build()
+
+        productRepository.save(product)
+        productRepository.save(productWithDiferentCategory)
+
+
+        val categories = productRepository.findAllCategories()
+        Assert.assertEquals(2, categories.size)
     }
 
 }
