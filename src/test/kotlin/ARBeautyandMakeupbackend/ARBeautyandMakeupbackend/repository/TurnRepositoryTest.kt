@@ -34,14 +34,4 @@ class TurnRepositoryTest {
         Assert.assertEquals(listOf<Turn>(), repository.findAllByDate(LocalDate.now()))
     }
 
-
-    @Test
-    fun testTurnRepositoryRetrievedAListWithTwoObjectsWhenWeFindByDate(){
-        var listTurns = TurnBuilder.turnListBySameDate(LocalDateTime.now())
-
-        listTurns.forEach { repository.save(it) }
-        Assert.assertEquals(listTurns.size, repository.findAllByDate(LocalDate.now()).size)
-    }
-
-
 }

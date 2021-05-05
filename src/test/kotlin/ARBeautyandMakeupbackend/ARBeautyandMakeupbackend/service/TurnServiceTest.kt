@@ -94,4 +94,21 @@ class TurnServiceTest {
 
         Assert.assertNotEquals(turnList.size, turnListWithoutATurn.size)
     }
+
+    @Test
+    fun whenWeAskTurnServiceForAllDatesOfItReturnsAListOfStringDates(){
+        var allDates = listOf(
+            "2021-04-20 10:30:00.0",
+            "2021-04-20 13:30:00.0",
+            "2021-04-20 15:00:00.0",
+            "2021-04-26 09:00:00.0",
+            "2021-04-26 15:00:00.0",
+            "2021-04-26 16:30:00.0")
+
+        `when`(turnRepositoryMock.getDates()).thenReturn(allDates)
+
+        Assert.assertEquals(allDates, turnService.getDates())
+    }
+
+
 }

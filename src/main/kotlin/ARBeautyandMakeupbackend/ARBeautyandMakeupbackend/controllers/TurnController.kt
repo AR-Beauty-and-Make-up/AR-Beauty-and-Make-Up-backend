@@ -70,4 +70,13 @@ class TurnController {
     }
 
 
+    @GetMapping("/dates")
+    fun getDates(): ResponseEntity<List<String>> {
+
+        val dates = turnService.getDates()
+        val response = ResponseEntity.status(HttpStatus.OK).body(dates)
+
+        return response
+    }
+
 }

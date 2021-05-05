@@ -5,6 +5,7 @@ import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.persistence.TurnReposit
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import java.time.LocalDate
+import java.time.LocalDateTime
 
 @Service
 class TurnService : ITurnService{
@@ -41,6 +42,10 @@ class TurnService : ITurnService{
 
     override fun deleteTurn(aTurn: Turn) {
         turnRepository.delete(aTurn)
+    }
+
+    override fun getDates(): List<String> {
+        return turnRepository.getDates()
     }
 
 
