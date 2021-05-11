@@ -35,4 +35,12 @@ class TurnTest {
         val aTurn = TurnBuilder.aTurn().withContactClient(aNumber).build()
         Assert.assertEquals(aTurn.contactNumber, aNumber)
     }
+
+
+    @Test
+    fun aTurnHasAEmail(){
+        val aEmail = "email"
+        val aTurn = TurnBuilder.aTurn().withEmail(aEmail).build()
+        Assert.assertEquals(aTurn.email, aEmail)
+    }
 }

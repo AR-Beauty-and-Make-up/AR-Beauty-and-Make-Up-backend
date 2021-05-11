@@ -1,13 +1,11 @@
 package ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.services
 
-import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.exceptions.CannotAddTurnException
-import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.exceptions.CannotFindTurnException
+
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.turn.Turn
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.persistence.TurnRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import java.time.LocalDate
-import java.time.LocalDateTime
 
 @Service
 class TurnService : ITurnService{
@@ -26,7 +24,7 @@ class TurnService : ITurnService{
 
     override fun find(id: Long): Turn {
 
-        return turnRepository.findById(id).orElseThrow { throw CannotFindTurnException() }
+        return turnRepository.findById(id).get()
     }
 
     override fun findAllByDate(date: LocalDate): List<Turn> {
