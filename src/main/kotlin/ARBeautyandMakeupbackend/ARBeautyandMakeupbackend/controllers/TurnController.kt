@@ -42,12 +42,8 @@ class TurnController {
     }
 
     @PostMapping("/turn")
-    fun createTurn(@RequestBody aTurn: JsonNode): HttpStatus {
-        var dateTime = aTurn["date"].toString().filterNot { it == '"' }
-
-
-        var newTurn = Turn(aTurn["name"].toString().filterNot { it == '"' }, LocalDateTime.parse(dateTime), aTurn["service"].toString().filterNot { it == '"' }, aTurn["tel"].asInt())
-        turnService.addTurn(newTurn)
+    fun createTurn(@RequestBody aTurn: Turn): HttpStatus {
+        turnService.addTurn(aTurn)
 
         return HttpStatus.OK
     }

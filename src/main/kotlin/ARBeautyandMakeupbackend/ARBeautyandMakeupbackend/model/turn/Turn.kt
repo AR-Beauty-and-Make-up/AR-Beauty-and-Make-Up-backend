@@ -14,65 +14,28 @@ open class Turn{
     open var clientName: String
     open var service: String
     open var contactNumber: Int
+    open var email: String
 
 
-    constructor(client: String, aDate: LocalDateTime, aService: String, aNumber: Int) {
+    constructor(client: String, aDate: LocalDateTime, aService: String, aNumber: Int, aEmail: String) {
         this.id = null
         this.date = aDate
         this.clientName = client
         this.service = aService
         this.contactNumber = aNumber
+        this.email = aEmail
 
     }
 
-    constructor(id: Long?, client: String, aDate: LocalDateTime, aService: String, aNumber: Int)  {
+    constructor(id: Long?, client: String, aDate: LocalDateTime, aService: String, aNumber: Int, aEmail: String)  {
         this.id = id
         this.date = aDate
         this.clientName = client
         this.service = aService
         this.contactNumber = aNumber
+        this.email = aEmail
     }
 
 
-    fun id(): Long? {
-        return this.id
-    }
-
-    fun date(): LocalDateTime {
-        return this.date
-    }
-
-    fun clientName(): String {
-        return this.clientName
-    }
-
-    fun service(): String {
-        return this.service
-    }
-
-    fun contactNumber(): Int {
-        return this.contactNumber
-    }
-
-
-    fun changeClientName(newName: String){
-        this.clientName = newName
-    }
-
-    fun changeDate(newDate: LocalDateTime) {
-        this.date = newDate
-    }
-
-    fun changeService(newService: String) {
-        this.service = newService
-    }
-
-    fun changeId(newId: Long){
-        this.id = newId
-    }
-
-    fun changeContactNumber(newNumber: Int) {
-        this.contactNumber = newNumber
-    }
 
 }

@@ -22,12 +22,12 @@ class DatabaseInitializate : CommandLineRunner {
 
     override fun run(vararg args: String?) {
 
-        val turnLucas = Turn("Lucas Avalos", LocalDateTime.of(2021, 4, 26, 9, 0), "Limpieza facial", 123456789)
-        val turnLuciana = Turn("Luciana Alonso", LocalDateTime.of(2021, 4, 20, 10, 30), "Masajes", 1122334455)
-        val turnBelen = Turn("Belen Amat", LocalDateTime.of(2021, 4, 20, 15, 0), "Maquillaje", 987654321)
-        val turnMicaela = Turn("Micaela Alonso", LocalDateTime.of(2021, 4, 26, 15, 0,0), "Masajes", 123456789)
-        val turnFrancisco = Turn("Francisco Perez", LocalDateTime.of(2021, 4, 20, 13, 30), "Mesoterapia", 123456789)
-        val turnNicolas = Turn("Nicolas Rodriguez", LocalDateTime.of(2021, 4, 26, 16, 30), "Masajes", 123456789)
+        val turnLucas = Turn("Lucas Avalos", LocalDateTime.of(2021, 4, 26, 9, 0), "Limpieza facial", 123456789, "lucas@gmail.com")
+        val turnLuciana = Turn("Luciana Alonso", LocalDateTime.of(2021, 4, 20, 10, 30), "Masajes", 1122334455, "luciana@gmail.com")
+        val turnBelen = Turn("Belen Amat", LocalDateTime.of(2021, 4, 20, 15, 0), "Maquillaje", 987654321, "belen@gmail.com")
+        val turnMicaela = Turn("Micaela Alonso", LocalDateTime.of(2021, 4, 26, 15, 0,0), "Masajes", 123456789, "mica@gmail.com")
+        val turnFrancisco = Turn("Francisco Perez", LocalDateTime.of(2021, 4, 20, 13, 30), "Mesoterapia", 123456789, "fran@gmail.com")
+        val turnNicolas = Turn("Nicolas Rodriguez", LocalDateTime.of(2021, 4, 26, 16, 30), "Masajes", 123456789, "nico@gmail.com")
 
         turnService.addTurn(turnLucas)
         turnService.addTurn(turnLuciana)
