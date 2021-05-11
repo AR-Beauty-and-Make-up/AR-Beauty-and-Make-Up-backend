@@ -73,8 +73,8 @@ class TurnServiceTest {
         `when`(turnRepositoryMock.findById(anyLong())).thenReturn(Optional.of(aTurn))
         `when`(turnRepositoryMock.save(aTurn)).thenReturn(updatedTurn)
 
-        var retrievedTurn = turnService.updateTurn(aTurn.id()!!, updatedTurn)
-        Assert.assertEquals(retrievedTurn.service(), newService)
+        var retrievedTurn = turnService.updateTurn(aTurn.id!!, updatedTurn)
+        Assert.assertEquals(retrievedTurn.service, newService)
 
     }
 
