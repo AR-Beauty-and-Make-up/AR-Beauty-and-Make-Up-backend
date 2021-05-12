@@ -43,7 +43,7 @@ class ProductService {
 
         return productPaginatedRepository.findAll(
                 PageRequest.of(page,
-                          5,
+                          10,
                                Sort.Direction.ASC,
                                sort),
         )

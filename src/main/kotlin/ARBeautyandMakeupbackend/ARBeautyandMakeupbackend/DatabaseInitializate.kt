@@ -44,6 +44,22 @@ class DatabaseInitializate : CommandLineRunner {
         val productGelLipiadorCara = Product("Gel Lipiador Mandelic", 670.0, Category.Maquillaje, "http://d2r9epyceweg5n.cloudfront.net/stores/431/014/products/732-c1968d70dcaa70a5cb15964731733632-640-0.jpg")
         val productEspumaMicelar = Product("Espuma Micelar Exel", 590.0, Category.Maquillaje, "http://d3ugyf2ht6aenh.cloudfront.net/stores/887/684/products/espuma-promoter1-0e13680cbb79101ffc16166887759909-640-0.jpg")
 
+        val productCremaCorporal2 = Product("Body Training - Crema corporal", 450.0, Category.Cremas, "https://image.jimcdn.com/app/cms/image/transf/dimension=2048x2048:format=jpg/path/sd10c94a28a61d989/image/i0d53a6e6910adf28/version/1564426448/image.jpg")
+        val productCremaParaCara2 = Product("Gold - Crema para Cara", 580.0, Category.Cremas, "https://image.jimcdn.com/app/cms/image/transf/dimension=2048x2048:format=jpg/path/sd10c94a28a61d989/image/ibb02f9cd79ab9020/version/1564156140/image.jpg")
+        val productLabial302 = Product("Labial Idraet - Hypnotic Red", 320.0, Category.Cremas, "http://d2r9epyceweg5n.cloudfront.net/stores/001/206/163/products/pro-hyaluron-ultracolor-creamy-lip-lapiz-labial-cremoso-11-hypnotic-red1-e3bd77bab9d79c4ddd15850833487905-640-0.png")
+        val productLabial212 = Product("Labial Idraet - Crush Coral", 320.0, Category.Cremas, "http://d2r9epyceweg5n.cloudfront.net/stores/001/170/247/products/pro-hyaluron-ultracolor-matte-lip-lapiz-labial-mate-30-crush-coral1-e6e5ff0a9f3e11890a15850837599452-640-01-1f7e745695d3baa20f16024443648168-640-0.png")
+        val productDelineadorLiquido2 = Product("Delineador Líquido Idraet - Negro", 475.0, Category.Maquillaje, "https://www.heavenimagenes.com/heavencommerce/cbed7736-4c76-4fd0-b719-9ff071142423/images/v2/IDRAET/1809061423593523_01_medium.jpg")
+        val productGelLipiadorCara2 = Product("Gel Lipiador Mandelic", 670.0, Category.Maquillaje, "http://d2r9epyceweg5n.cloudfront.net/stores/431/014/products/732-c1968d70dcaa70a5cb15964731733632-640-0.jpg")
+        val productEspumaMicelar2 = Product("Espuma Micelar Exel", 590.0, Category.Maquillaje, "http://d3ugyf2ht6aenh.cloudfront.net/stores/887/684/products/espuma-promoter1-0e13680cbb79101ffc16166887759909-640-0.jpg")
+
+        val productCremaCorporal3 = Product("Body Training - Crema corporal", 450.0, Category.Cremas, "https://image.jimcdn.com/app/cms/image/transf/dimension=2048x2048:format=jpg/path/sd10c94a28a61d989/image/i0d53a6e6910adf28/version/1564426448/image.jpg")
+        val productCremaParaCara3 = Product("Gold - Crema para Cara", 580.0, Category.Cremas, "https://image.jimcdn.com/app/cms/image/transf/dimension=2048x2048:format=jpg/path/sd10c94a28a61d989/image/ibb02f9cd79ab9020/version/1564156140/image.jpg")
+        val productLabial303 = Product("Labial Idraet - Hypnotic Red", 320.0, Category.Cremas, "http://d2r9epyceweg5n.cloudfront.net/stores/001/206/163/products/pro-hyaluron-ultracolor-creamy-lip-lapiz-labial-cremoso-11-hypnotic-red1-e3bd77bab9d79c4ddd15850833487905-640-0.png")
+        val productLabial213 = Product("Labial Idraet - Crush Coral", 320.0, Category.Cremas, "http://d2r9epyceweg5n.cloudfront.net/stores/001/170/247/products/pro-hyaluron-ultracolor-matte-lip-lapiz-labial-mate-30-crush-coral1-e6e5ff0a9f3e11890a15850837599452-640-01-1f7e745695d3baa20f16024443648168-640-0.png")
+        val productDelineadorLiquido3 = Product("Delineador Líquido Idraet - Negro", 475.0, Category.Maquillaje, "https://www.heavenimagenes.com/heavencommerce/cbed7736-4c76-4fd0-b719-9ff071142423/images/v2/IDRAET/1809061423593523_01_medium.jpg")
+        val productGelLipiadorCara3 = Product("Gel Lipiador Mandelic", 670.0, Category.Maquillaje, "http://d2r9epyceweg5n.cloudfront.net/stores/431/014/products/732-c1968d70dcaa70a5cb15964731733632-640-0.jpg")
+        val productEspumaMicelar3 = Product("Espuma Micelar Exel", 590.0, Category.Maquillaje, "http://d3ugyf2ht6aenh.cloudfront.net/stores/887/684/products/espuma-promoter1-0e13680cbb79101ffc16166887759909-640-0.jpg")
+
         productService.addProduct(productCremaCorporal)
         productService.addProduct(productCremaParaCara)
         productService.addProduct(productLabial30)
@@ -51,5 +67,21 @@ class DatabaseInitializate : CommandLineRunner {
         productService.addProduct(productDelineadorLiquido)
         productService.addProduct(productGelLipiadorCara)
         productService.addProduct(productEspumaMicelar)
+
+        productService.addProduct(productCremaCorporal2)
+        productService.addProduct(productCremaParaCara2)
+        productService.addProduct(productLabial302)
+        productService.addProduct(productLabial212)
+        productService.addProduct(productDelineadorLiquido2)
+        productService.addProduct(productGelLipiadorCara2)
+        productService.addProduct(productEspumaMicelar2)
+
+        productService.addProduct(productCremaCorporal3)
+        productService.addProduct(productCremaParaCara3)
+        productService.addProduct(productLabial303)
+        productService.addProduct(productLabial213)
+        productService.addProduct(productDelineadorLiquido3)
+        productService.addProduct(productGelLipiadorCara3)
+        productService.addProduct(productEspumaMicelar3)
     }
 }
