@@ -1,6 +1,7 @@
 package ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.service
 
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.builders.TurnBuilder
+import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.service.Service
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.turn.Turn
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.persistence.TurnRepository
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.services.TurnService
@@ -65,7 +66,7 @@ class TurnServiceTest {
 
     @Test
     fun aTurnCanHaveItDataUpdated(){
-        val newService = "Masoterapia"
+        val newService = Service.Mesoterapia
         var id = Random().nextLong()
         var aTurn = TurnBuilder.aTurn().withId(id).build()
         var updatedTurn = TurnBuilder.aTurn().withService(newService).build()

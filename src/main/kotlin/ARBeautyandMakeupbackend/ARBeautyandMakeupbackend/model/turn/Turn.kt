@@ -1,5 +1,6 @@
 package ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.turn
 
+import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.service.Service
 import java.time.LocalDateTime
 import javax.persistence.*
 
@@ -12,12 +13,12 @@ open class Turn{
     open var id: Long?
     open var date: LocalDateTime
     open var clientName: String
-    open var service: String
+    open var service: Service
     open var contactNumber: Int
     open var email: String
 
 
-    constructor(client: String, aDate: LocalDateTime, aService: String, aNumber: Int, aEmail: String) {
+    constructor(client: String, aDate: LocalDateTime, aService: Service, aNumber: Int, aEmail: String) {
         this.id = null
         this.date = aDate
         this.clientName = client
@@ -27,7 +28,7 @@ open class Turn{
 
     }
 
-    constructor(id: Long?, client: String, aDate: LocalDateTime, aService: String, aNumber: Int, aEmail: String)  {
+    constructor(id: Long?, client: String, aDate: LocalDateTime, aService: Service, aNumber: Int, aEmail: String)  {
         this.id = id
         this.date = aDate
         this.clientName = client
