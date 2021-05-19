@@ -1,11 +1,13 @@
 package ARBeautyandMakeupbackend.ARBeautyandMakeupbackend
 
+import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.builders.UserBuilder
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.category.Category
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.product.Product
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.service.Service
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.turn.Turn
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.services.ProductService
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.services.TurnService
+import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.services.UserService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.CommandLineRunner
 import org.springframework.stereotype.Component
@@ -19,6 +21,9 @@ class DatabaseInitializate : CommandLineRunner {
 
     @Autowired
     lateinit var productService: ProductService
+
+    @Autowired
+    lateinit var userService: UserService
 
 
     override fun run(vararg args: String?) {
@@ -84,5 +89,12 @@ class DatabaseInitializate : CommandLineRunner {
         productService.addProduct(productDelineadorLiquido3)
         productService.addProduct(productGelLipiadorCara3)
         productService.addProduct(productEspumaMicelar3)
+
+
+        val user = UserBuilder.aUser().build()
+        val admin = UserBuilder.aUser().withEmail("lucas2@gmail.com").buildAdmin()
+
+        userService.addUser(user)
+        userService.addUser(admin)
     }
 }
