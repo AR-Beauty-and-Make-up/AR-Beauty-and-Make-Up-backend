@@ -1,6 +1,7 @@
 package ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.turn
 
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.builders.TurnBuilder
+import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.service.Service
 import org.junit.Assert
 import org.junit.Test
 import java.time.LocalDateTime
@@ -23,8 +24,8 @@ class TurnTest {
     }
 
     @Test
-    fun aTurnHasACategory(){
-        val aService = "Masajes"
+    fun aTurnHasAService(){
+        val aService = Service.MasajeReductor
         val aTurn = TurnBuilder.aTurn().withService(aService).build()
         Assert.assertEquals(aTurn.service, aService)
     }
