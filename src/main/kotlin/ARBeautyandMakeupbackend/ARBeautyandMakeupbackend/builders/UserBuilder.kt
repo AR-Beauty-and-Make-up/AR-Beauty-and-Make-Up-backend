@@ -5,6 +5,7 @@ import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.product.Product
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.user.Admin
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.user.Client
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.user.User
+import java.time.LocalDateTime
 import javax.persistence.Column
 
 class UserBuilder {
@@ -13,6 +14,9 @@ class UserBuilder {
     private var fullname: String = "Lucas Avalos"
     private var password: String = "password"
     private var email: String = "lucas@gmail.com"
+    private var dateOfBirth: LocalDateTime = LocalDateTime.of(1994,3,12, 7 ,0)
+    private var contactNumber: Int = 1151214699
+    private var address: String = "Calle Falsa 123, Berna, Buenos Aires (1879)"
 
 
     companion object {
@@ -22,11 +26,11 @@ class UserBuilder {
     }
 
     fun build() : User {
-        return Client(this.id, this.fullname, this.password, this.email)
+        return Client(this.id, this.fullname, this.password, this.email, this.dateOfBirth, this.contactNumber, this.address)
     }
 
     fun buildAdmin() : User {
-        return Admin(this.id, this.fullname, this.password, this.email)
+        return Admin(this.id, this.fullname, this.password, this.email, this.dateOfBirth, this.contactNumber, this.address)
     }
 
 
@@ -48,6 +52,21 @@ class UserBuilder {
 
     fun withEmail(aEmail: String): UserBuilder {
         this.email = aEmail
+        return this
+    }
+
+    fun withDateOfBirth(aDate: LocalDateTime): UserBuilder {
+        this.dateOfBirth = aDate
+        return this
+    }
+
+    fun withConcatNumber(aContactNumber: Int): UserBuilder {
+        this.contactNumber = aContactNumber
+        return this
+    }
+
+    fun withAddress(anAddress: String): UserBuilder {
+        this.address = anAddress
         return this
     }
 
