@@ -1,5 +1,6 @@
 package ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.user
 
+import java.time.LocalDateTime
 import javax.persistence.Entity
 import javax.persistence.Inheritance
 import javax.persistence.InheritanceType
@@ -9,11 +10,13 @@ import javax.persistence.InheritanceType
 class Admin : User {
 
 
-    constructor(fullname: String, password: String, email: String) : super(fullname, password, email)  {
+    constructor(fullname: String, password: String, email: String, dateOfBirth: LocalDateTime, contactNumber: Int, address: String)
+            : super(fullname, password, email, dateOfBirth, contactNumber, address)  {
         this.admin = true
     }
 
-    constructor(id:Long?, fullname: String, password: String, email: String) : super(id, fullname, password, email)  {
+    constructor(id:Long?, fullname: String, password: String, email: String, dateOfBirth: LocalDateTime, contactNumber: Int, address: String)
+            : super(id, fullname, password, email, dateOfBirth, contactNumber, address)  {
         this.admin = true
     }
 
