@@ -34,4 +34,9 @@ class UserController {
         return response
     }
 
+    @GetMapping("/users")
+    fun getAllUsers(): List<User> {
+        return userService.getUsers()
+    }
+
 }

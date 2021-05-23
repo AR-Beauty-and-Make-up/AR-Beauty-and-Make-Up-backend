@@ -20,4 +20,8 @@ class UserService {
     fun addUser(user : User) : User{
         return userRepository.save(user)
     }
+
+    fun getUsers(): List<User> {
+        return userRepository.findAll()
+    }
 }
