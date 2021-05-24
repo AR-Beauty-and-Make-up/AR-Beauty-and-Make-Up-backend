@@ -79,6 +79,25 @@ class UserControllerTest() {
             .andExpect(MockMvcResultMatchers.jsonPath("$.email").value("lucas@gmail.com"))
     }
 
+    @Test
+    fun  aUserIsNotValidatedIfItsUsernameMatchesWithItsPassword(){
+        val body = userToFail()
+
+        mockMvc.perform(MockMvcRequestBuilders
+            .post("/validateUser")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(body.toString()))
+            .andExpect(MockMvcResultMatchers.status().isNotFound)
+    }
+
+    private fun userToFail(): JSONObject {
+        val userToValidate = JSONObject()
+        userToValidate.put("email", "lucas@gmail.com")
+        userToValidate.put("password", "invalid")
+
+        return userToValidate
+    }
+
     private fun userToValidate(aUser: Client): JSONObject {
         val userToValidate = JSONObject()
         userToValidate.put("email", aUser.email)
