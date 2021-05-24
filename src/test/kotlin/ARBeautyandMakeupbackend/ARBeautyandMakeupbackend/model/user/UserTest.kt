@@ -26,13 +26,13 @@ class UserTest {
     @Test
     fun aUserIsNotAdmin(){
         val aUser = UserBuilder.aUser().build()
-        Assert.assertFalse(aUser.admin)
+        Assert.assertFalse(aUser.isAdmin)
     }
 
     @Test
     fun aUserIsAdmin(){
         val aUser = UserBuilder.aUser().buildAdmin()
-        Assert.assertTrue(aUser.admin)
+        Assert.assertTrue(aUser.isAdmin)
     }
 
     @Test

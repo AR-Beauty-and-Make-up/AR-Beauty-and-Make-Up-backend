@@ -1,7 +1,6 @@
 package ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.repository
 
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.builders.UserBuilder
-import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.user.Client
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.user.User
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.persistence.UserRepository
 import org.junit.Assert
@@ -36,6 +35,6 @@ class UserRepositoryTest {
         val retrievedAdminUser = userRepository.findById(adminUser.id!!).get()
 
         Assert.assertEquals(adminUser.fullname, retrievedAdminUser.fullname)
-        Assert.assertTrue(retrievedAdminUser.admin)
+        Assert.assertTrue(retrievedAdminUser.isAdmin)
     }
 }

@@ -1,53 +1,84 @@
 package ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.controllers
 
-import org.junit.Assert
+import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.builders.UserBuilder
+import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.user.Client
+import org.json.JSONObject
 import org.junit.jupiter.api.Test
-import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
-
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.boot.test.web.client.TestRestTemplate
-import org.springframework.boot.test.web.client.getForEntity
-import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
-import org.springframework.http.ResponseEntity
-import org.springframework.test.context.junit4.SpringRunner
 import org.springframework.test.web.servlet.MockMvc
-import org.springframework.test.web.servlet.MvcResult
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-//@RunWith(SpringRunner::class)
 @AutoConfigureMockMvc
-class UserControllerTest(@Autowired val restTemplate: TestRestTemplate) {
+class UserControllerTest() {
 
     @Autowired
     lateinit var mockMvc: MockMvc
 
     @Test
-    fun askingForAUserByIdReturnsTheUserAnd200Status() {
-        val entity: ResponseEntity<String> = restTemplate.getForEntity<String>("/user/1")
-
-        Assert.assertEquals(HttpStatus.OK, entity.statusCode)
-        Assert.assertTrue(entity.body?.contains("Lucas Avalos")!!)
-        Assert.assertTrue(entity.body?.contains("password")!!)
-        Assert.assertTrue(entity.body?.contains("lucas@gmail.com")!!)
-        Assert.assertTrue(entity.body?.contains("1151214699")!!)
-        Assert.assertTrue(entity.body?.contains("Calle Falsa 123, Berna, Buenos Aires (1879)")!!)
-
-    }
-
-    @Test
-    fun anotherWay() {
+    fun anotheraskingForAUserByIdReturnsTheUserAnd200Status() {
         mockMvc.perform(MockMvcRequestBuilders
             .get("/user/1")
             .contentType(MediaType.APPLICATION_JSON))
             .andExpect(MockMvcResultMatchers.status().isOk)
             .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(MockMvcResultMatchers.jsonPath("$.fullname").value("Lucas Avalos"))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.password").value("password"))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.contactNumber").value("1151214699"))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.email").value("lucas@gmail.com"))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.isAdmin").value("false"))
+    }
+
+    @Test
+    fun askingForAAdminUserByIdReturnsTheAdminUserAnd200Status() {
+        mockMvc.perform(MockMvcRequestBuilders
+            .get("/user/3")
+            .contentType(MediaType.APPLICATION_JSON))
+            .andExpect(MockMvcResultMatchers.status().isOk)
+            .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.fullname").value("Andrea Rudi"))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.password").value("password"))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.contactNumber").value("1162434990"))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.email").value("andrearudi@gmail.com"))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.isAdmin").value("true"))
+    }
+
+    @Test
+    fun creatingANewClientUserTheUserItsReturnedAndTheStatusIs200(){
+
+        val newUser = UserBuilder.aUser().withEmail("beluamat@gmail.com").withFullname("Belen Amat").withPassword("belu123").build()
+        val asJson = asJson(newUser)
+
+        mockMvc.perform(MockMvcRequestBuilders
+            .post("/users")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(asJson.toString()))
+            .andExpect(MockMvcResultMatchers.status().isOk)
+            .andExpect(MockMvcResultMatchers.jsonPath("$.fullname").value("Belen Amat"))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.password").value("belu123"))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.contactNumber").value("1151214699"))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.email").value("beluamat@gmail.com"))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.isAdmin").value("false"))
+            .andReturn()
+    }
+
+    private fun asJson(newUser: Client): JSONObject {
+        val newClientJson = JSONObject()
+        newClientJson.put("email", newUser.email)
+        newClientJson.put("fullname", newUser.fullname)
+        newClientJson.put("password", newUser.password)
+        newClientJson.put("contactNumber", newUser.contactNumber)
+        newClientJson.put("address", newUser.address)
+        newClientJson.put("dateOfBirth", newUser.dateOfBirth)
+        newClientJson.put("isAdmin", newUser.isAdmin)
+
+        return newClientJson
     }
 }

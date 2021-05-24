@@ -25,11 +25,11 @@ class UserBuilder {
         }
     }
 
-    fun build() : User {
+    fun build() : Client {
         return Client(this.id, this.fullname, this.password, this.email, this.dateOfBirth, this.contactNumber, this.address)
     }
 
-    fun buildAdmin() : User {
+    fun buildAdmin() : Admin {
         return Admin(this.id, this.fullname, this.password, this.email, this.dateOfBirth, this.contactNumber, this.address)
     }
 

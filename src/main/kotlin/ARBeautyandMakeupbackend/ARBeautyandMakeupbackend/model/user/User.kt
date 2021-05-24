@@ -21,7 +21,7 @@ abstract class User {
     @Column(unique = true)
     open var email: String
 
-    open var admin: Boolean
+    open var isAdmin: Boolean
 
 
     constructor(fullName: String, password: String, email: String, dateOfBirth: LocalDateTime, contactNumber: Int, address: String) {
@@ -32,7 +32,7 @@ abstract class User {
         this.dateOfBirth = dateOfBirth
         this.contactNumber = contactNumber
         this.address = address
-        this.admin = false
+        this.isAdmin = false
 
     }
 
@@ -44,7 +44,7 @@ abstract class User {
         this.dateOfBirth = dateOfBirth
         this.contactNumber = contactNumber
         this.address = address
-        this.admin = false
+        this.isAdmin = false
     }
 
 }

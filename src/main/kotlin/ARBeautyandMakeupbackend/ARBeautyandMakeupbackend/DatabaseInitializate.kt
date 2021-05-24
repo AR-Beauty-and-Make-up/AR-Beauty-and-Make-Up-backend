@@ -92,9 +92,11 @@ class DatabaseInitializate : CommandLineRunner {
 
 
         val user = UserBuilder.aUser().build()
-        val admin = UserBuilder.aUser().withEmail("lucas2@gmail.com").buildAdmin()
+        val anotherUser = UserBuilder.aUser().withFullname("Luciana Alonso").withEmail("luciana@gamil.com").withConcatNumber(1144778899).build()
+        val admin = UserBuilder.aUser().withFullname("Andrea Rudi").withConcatNumber(1162434990).withEmail("andrearudi@gmail.com").buildAdmin()
 
         userService.addUser(user)
-        userService.addUser(admin)
+        userService.addUser(anotherUser)
+        userService.addAdminUser(admin)
     }
 }

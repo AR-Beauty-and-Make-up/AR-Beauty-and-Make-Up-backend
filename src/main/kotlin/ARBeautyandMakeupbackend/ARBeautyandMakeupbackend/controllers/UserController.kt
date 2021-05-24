@@ -1,20 +1,15 @@
 package ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.controllers
 
 
-import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.turn.Turn
+import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.user.Client
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.user.User
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.services.UserService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration
-import org.springframework.format.annotation.DateTimeFormat
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.transaction.annotation.Transactional
-import org.springframework.web.bind.annotation.CrossOrigin
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.RestController
-import java.time.LocalDate
+import org.springframework.web.bind.annotation.*
 
 
 @RestController
@@ -37,6 +32,12 @@ class UserController {
     @GetMapping("/users")
     fun getAllUsers(): List<User> {
         return userService.getUsers()
+    }
+
+    @RequestMapping("/users", method = [RequestMethod.POST])
+    fun createUser(@RequestBody aUser: Client): ResponseEntity<Client> {
+        val savedUser: Client = userService.addUser(aUser)
+        return ResponseEntity.status(HttpStatus.OK).body(savedUser)
     }
 
 }
