@@ -12,12 +12,12 @@ class Admin : User {
 
     constructor(fullname: String, password: String, email: String, dateOfBirth: LocalDateTime, contactNumber: Int, address: String)
             : super(fullname, password, email, dateOfBirth, contactNumber, address)  {
-        this.admin = true
+        this.isAdmin = true
     }
 
     constructor(id:Long?, fullname: String, password: String, email: String, dateOfBirth: LocalDateTime, contactNumber: Int, address: String)
             : super(id, fullname, password, email, dateOfBirth, contactNumber, address)  {
-        this.admin = true
+        this.isAdmin = true
     }
 
 }
