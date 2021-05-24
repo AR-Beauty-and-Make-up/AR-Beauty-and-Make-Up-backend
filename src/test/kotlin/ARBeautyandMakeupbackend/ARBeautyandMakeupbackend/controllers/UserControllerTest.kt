@@ -6,13 +6,11 @@ import org.json.JSONObject
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -54,12 +52,12 @@ class UserControllerTest() {
     fun creatingANewClientUserTheUserItsReturnedAndTheStatusIs200(){
 
         val newUser = UserBuilder.aUser().withEmail("beluamat@gmail.com").withFullname("Belen Amat").withPassword("belu123").build()
-        val asJson = asJson(newUser)
+        val body = asJson(newUser)
 
         mockMvc.perform(MockMvcRequestBuilders
             .post("/users")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(asJson.toString()))
+            .content(body.toString()))
             .andExpect(MockMvcResultMatchers.status().isOk)
             .andExpect(MockMvcResultMatchers.jsonPath("$.fullname").value("Belen Amat"))
             .andExpect(MockMvcResultMatchers.jsonPath("$.password").value("belu123"))
@@ -67,6 +65,26 @@ class UserControllerTest() {
             .andExpect(MockMvcResultMatchers.jsonPath("$.email").value("beluamat@gmail.com"))
             .andExpect(MockMvcResultMatchers.jsonPath("$.isAdmin").value("false"))
             .andReturn()
+    }
+
+    @Test
+    fun  aUserIsValidatedIfItsEmailMatchesWithItsPassword(){
+        val body = userToValidate(UserBuilder.aUser().build())
+
+        mockMvc.perform(MockMvcRequestBuilders
+            .post("/validateUser")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(body.toString()))
+            .andExpect(MockMvcResultMatchers.status().isOk)
+            .andExpect(MockMvcResultMatchers.jsonPath("$.email").value("lucas@gmail.com"))
+    }
+
+    private fun userToValidate(aUser: Client): JSONObject {
+        val userToValidate = JSONObject()
+        userToValidate.put("email", aUser.email)
+        userToValidate.put("password", aUser.password)
+
+        return userToValidate
     }
 
     private fun asJson(newUser: Client): JSONObject {

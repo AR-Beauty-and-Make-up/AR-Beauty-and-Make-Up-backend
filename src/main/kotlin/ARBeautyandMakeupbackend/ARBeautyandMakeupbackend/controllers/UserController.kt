@@ -3,6 +3,7 @@ package ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.controllers
 
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.user.Client
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.user.User
+import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.user.ValidationUserDTO
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.services.UserService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration
@@ -38,6 +39,12 @@ class UserController {
     fun createUser(@RequestBody aUser: Client): ResponseEntity<Client> {
         val savedUser: Client = userService.addUser(aUser)
         return ResponseEntity.status(HttpStatus.OK).body(savedUser)
+    }
+
+    @RequestMapping("/validateUser", method = [RequestMethod.POST])
+    fun validateUser(@RequestBody validationUserDTO: ValidationUserDTO): ResponseEntity<User>{
+        val aUser = userService.authenticateUser(validationUserDTO.getEmail()!!, validationUserDTO.getPassword()!!)
+        return ResponseEntity.status(HttpStatus.OK).body(aUser)
     }
 
 }

@@ -1,5 +1,6 @@
 package ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.services
 
+import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.exceptions.NotFoundUserException
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.user.Admin
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.user.Client
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.user.User
@@ -28,5 +29,9 @@ class UserService {
 
     fun addAdminUser(admin: Admin): Admin {
         return userRepository.save(admin)
+    }
+
+    fun authenticateUser(email: String, password: String): User? {
+        return userRepository.findByEmailAndPassword(email, password) ?: throw NotFoundUserException("Invalid user or password")
     }
 }
