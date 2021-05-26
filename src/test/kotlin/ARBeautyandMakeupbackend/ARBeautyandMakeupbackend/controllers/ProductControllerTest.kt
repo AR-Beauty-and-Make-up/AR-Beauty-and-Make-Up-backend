@@ -28,6 +28,7 @@ class ProductControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.get("/products")
             .contentType(MediaType.APPLICATION_JSON))
             .andExpect(MockMvcResultMatchers.status().isOk)
+            .andExpect(MockMvcResultMatchers.jsonPath("$").isArray)
     }
 
     @Test
@@ -35,5 +36,11 @@ class ProductControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.get("/products/Cremas")
             .contentType(MediaType.APPLICATION_JSON))
             .andExpect(MockMvcResultMatchers.status().isOk)
+            .andExpect(MockMvcResultMatchers.jsonPath("$").isArray)
+            .andExpect(MockMvcResultMatchers.jsonPath("$.[0].category").value("Cremas"))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.[1].category").value("Cremas"))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.[2].category").value("Cremas"))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.[3].category").value("Cremas"))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.[4].category").value("Cremas"))
     }
 }
