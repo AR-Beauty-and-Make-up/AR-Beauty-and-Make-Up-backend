@@ -42,14 +42,14 @@ class TurnControllerTest {
             .andExpect(MockMvcResultMatchers.status().isOk)
             .andExpect(MockMvcResultMatchers.jsonPath("$.clientName").value(aTurn.clientName))
             //.andExpect(MockMvcResultMatchers.jsonPath("$.date").value(aTurn.date))
-            //.andExpect(MockMvcResultMatchers.jsonPath("$.service").value(aTurn.service))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.service").value(aTurn.service.toString()))
             .andExpect(MockMvcResultMatchers.jsonPath("$.contactNumber").value(aTurn.contactNumber))
             .andExpect(MockMvcResultMatchers.jsonPath("$.email").value(aTurn.email))
     }
 
     @Test
     fun ifWeEditATurnReturnsTheUpdatedTurn(){
-        var aTurn = TurnBuilder.aTurn().withContactClient(1177889944).build()
+        val aTurn = TurnBuilder.aTurn().withContactClient(1177889944).build()
 
         val body = genereteTurnBody(aTurn)
 
@@ -58,8 +58,8 @@ class TurnControllerTest {
             .content(body.toString()))
             .andExpect(MockMvcResultMatchers.status().isOk)
             .andExpect(MockMvcResultMatchers.jsonPath("$.clientName").value(aTurn.clientName))
-            //.andExpect(MockMvcResultMatchers.jsonPath("$.date").value(aTurn.date.toString()))
-            //.andExpect(MockMvcResultMatchers.jsonPath("$.service").value(aTurn.service))
+            //.andExpect(MockMvcResultMatchers.jsonPath("$.date").value(aTurn.date))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.service").value(aTurn.service.toString())) //Si no lo paso a string, falla. Ver
             .andExpect(MockMvcResultMatchers.jsonPath("$.contactNumber").value(aTurn.contactNumber))
             .andExpect(MockMvcResultMatchers.jsonPath("$.email").value(aTurn.email))
     }
@@ -68,7 +68,7 @@ class TurnControllerTest {
     private fun genereteTurnBody(aTurn: Turn): JSONObject {
         var jsonTurn = JSONObject()
         jsonTurn.put("clientName", aTurn.clientName)
-        jsonTurn.put("date", aTurn.date.toString())
+        jsonTurn.put("date", aTurn.date)
         jsonTurn.put("service", aTurn.service)
         jsonTurn.put("contactNumber", aTurn.contactNumber)
         jsonTurn.put("email", aTurn.email)
