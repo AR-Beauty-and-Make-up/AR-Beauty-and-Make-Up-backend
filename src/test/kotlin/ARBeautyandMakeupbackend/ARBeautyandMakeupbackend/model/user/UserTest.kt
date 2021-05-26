@@ -3,6 +3,7 @@ package ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.user
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.builders.UserBuilder
 import org.junit.Assert
 import org.junit.Test
+import java.time.LocalDate
 import java.time.LocalDateTime
 
 
@@ -37,7 +38,7 @@ class UserTest {
 
     @Test
     fun aUserClientHasOrders(){
-        val aUser  = UserBuilder.aUser().build() as Client
+        val aUser  = UserBuilder.aUser().build() as ClientUser
         Assert.assertEquals(aUser.orders.size, 0)
     }
 
@@ -50,7 +51,7 @@ class UserTest {
 
     @Test
     fun aUserHasADateOfBirth(){
-        val aDate = LocalDateTime.of(1994,3,12,12,0)
+        val aDate = LocalDate.of(1994,3,12)
         val aUser = UserBuilder.aUser().withDateOfBirth(aDate).build()
         Assert.assertEquals(aUser.dateOfBirth, aDate)
     }
