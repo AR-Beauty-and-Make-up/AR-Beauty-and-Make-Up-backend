@@ -64,6 +64,12 @@ class TurnControllerTest {
             .andExpect(MockMvcResultMatchers.jsonPath("$.email").value(aTurn.email))
     }
 
+    @Test
+    fun ifWeDeleteATurnReturnsStatus200(){
+        mockMvc.perform(MockMvcRequestBuilders.delete("/turns/delete/1"))
+            .andExpect(MockMvcResultMatchers.status().isOk)
+    }
+
 
     private fun genereteTurnBody(aTurn: Turn): JSONObject {
         var jsonTurn = JSONObject()
