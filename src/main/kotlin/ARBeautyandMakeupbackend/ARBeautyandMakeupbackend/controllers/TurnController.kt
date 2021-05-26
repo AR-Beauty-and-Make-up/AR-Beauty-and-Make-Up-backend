@@ -42,13 +42,12 @@ class TurnController {
     }
 
     @PostMapping("/turn")
-    fun createTurn(@RequestBody aTurn: Turn): HttpStatus {
-        turnService.addTurn(aTurn)
+    fun createTurn(@RequestBody aTurn: Turn): ResponseEntity<Turn> {
 
-        return HttpStatus.OK
+        return ResponseEntity.status(HttpStatus.OK).body(turnService.addTurn(aTurn))
     }
 
-    @PutMapping("turns/{id}")
+    @RequestMapping("turns/{id}", method = [RequestMethod.PUT])
     fun updateTurn(@RequestBody aTurn: Turn, @PathVariable("id") id: String): ResponseEntity<Turn>{
         var turnId = id.toLong()
         var turnToUpdate = turnService.updateTurn(turnId, aTurn)
