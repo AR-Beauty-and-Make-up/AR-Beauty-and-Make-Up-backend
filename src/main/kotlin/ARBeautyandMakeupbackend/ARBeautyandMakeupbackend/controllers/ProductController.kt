@@ -43,7 +43,7 @@ class ProductController {
         return response
     }
 
-    @GetMapping("/categories/{category}")
+    @GetMapping("/products/{category}")
     fun getProductByCategory(@PathVariable("category") category: String): ResponseEntity<List<Product>> {
         val categories = productService.findAllByACategory(Category.valueOf(category))
         val response = ResponseEntity.status(HttpStatus.OK).body(categories)
