@@ -1,7 +1,7 @@
 package ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.controllers
 
 
-import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.user.Client
+import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.user.ClientUser
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.user.User
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.user.ValidationUserDTO
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.services.UserService
@@ -36,8 +36,8 @@ class UserController {
     }
 
     @RequestMapping("/users", method = [RequestMethod.POST])
-    fun createUser(@RequestBody aUser: Client): ResponseEntity<Client> {
-        val savedUser: Client = userService.addUser(aUser)
+    fun createUser(@RequestBody aUser: ClientUser): ResponseEntity<ClientUser> {
+        val savedUser: ClientUser = userService.addUser(aUser)
         return ResponseEntity.status(HttpStatus.OK).body(savedUser)
     }
 

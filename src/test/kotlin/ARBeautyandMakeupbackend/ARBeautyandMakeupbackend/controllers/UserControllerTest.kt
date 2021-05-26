@@ -1,7 +1,7 @@
 package ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.controllers
 
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.builders.UserBuilder
-import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.user.Client
+import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.user.ClientUser
 import org.json.JSONObject
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -98,7 +98,7 @@ class UserControllerTest() {
         return userToValidate
     }
 
-    private fun userToValidate(aUser: Client): JSONObject {
+    private fun userToValidate(aUser: ClientUser): JSONObject {
         val userToValidate = JSONObject()
         userToValidate.put("email", aUser.email)
         userToValidate.put("password", aUser.password)
@@ -106,7 +106,7 @@ class UserControllerTest() {
         return userToValidate
     }
 
-    private fun asJson(newUser: Client): JSONObject {
+    private fun asJson(newUser: ClientUser): JSONObject {
         val newClientJson = JSONObject()
         newClientJson.put("email", newUser.email)
         newClientJson.put("fullname", newUser.fullname)

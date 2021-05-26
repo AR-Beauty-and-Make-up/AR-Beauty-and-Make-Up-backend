@@ -2,6 +2,7 @@ package ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.user
 
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect
+import java.time.LocalDate
 import java.time.LocalDateTime
 import javax.persistence.*
 
@@ -15,16 +16,16 @@ abstract class User {
     open var id: Long?
     open var fullname: String
     open var password: String
-    open var dateOfBirth: LocalDateTime
-    open var contactNumber: Int
-    open var address: String
+    open var dateOfBirth: LocalDate?
+    open var contactNumber: Int?
+    open var address: String?
     @Column(unique = true)
     open var email: String
 
     open var isAdmin: Boolean
 
 
-    constructor(fullName: String, password: String, email: String, dateOfBirth: LocalDateTime, contactNumber: Int, address: String) {
+    constructor(fullName: String, password: String, email: String, dateOfBirth: LocalDate?, contactNumber: Int?, address: String?) {
         this.id = null
         this.fullname = fullName
         this.password = password
@@ -36,7 +37,7 @@ abstract class User {
 
     }
 
-    constructor(id: Long?, fullName: String, password: String,email: String, dateOfBirth: LocalDateTime, contactNumber: Int, address: String) {
+    constructor(id: Long?, fullName: String, password: String,email: String, dateOfBirth: LocalDate?, contactNumber: Int?, address: String?) {
         this.id = id
         this.fullname = fullName
         this.password = password
