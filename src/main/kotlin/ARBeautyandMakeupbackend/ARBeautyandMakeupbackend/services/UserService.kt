@@ -1,8 +1,8 @@
 package ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.services
 
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.exceptions.NotFoundUserException
-import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.user.Admin
-import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.user.Client
+import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.user.AdminUser
+import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.user.ClientUser
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.user.User
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.persistence.UserRepository
 import org.springframework.beans.factory.annotation.Autowired
@@ -19,16 +19,16 @@ class UserService {
         return userRepository.findById(id).get()
     }
 
-    fun addUser(clientUser : Client) : Client {
-        return userRepository.save(clientUser)
+    fun addUser(clientUserUser : ClientUser) : ClientUser {
+        return userRepository.save(clientUserUser)
     }
 
     fun getUsers(): List<User> {
         return userRepository.findAll()
     }
 
-    fun addAdminUser(admin: Admin): Admin {
-        return userRepository.save(admin)
+    fun addAdminUser(adminUser: AdminUser): AdminUser {
+        return userRepository.save(adminUser)
     }
 
     fun authenticateUser(email: String, password: String): User? {
