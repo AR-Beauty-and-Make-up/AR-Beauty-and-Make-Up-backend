@@ -24,7 +24,7 @@ class UserController {
 
 
     @GetMapping("/user/{id}")
-    fun getTurnsByDate(@PathVariable("id") id: Long): ResponseEntity<User> {
+    fun getUserById(@PathVariable("id") id: Long): ResponseEntity<User> {
         val user = userService.getUser(id)
         val response = ResponseEntity.status(HttpStatus.OK).body(user)
         return response
