@@ -7,8 +7,9 @@ import java.time.LocalDate
 class UserBuilder {
 
     private var id: Long? = null
+    private var photo: String? = null
     private var fullname: String = "Lucas Avalos"
-    private var password: String = "password"
+    private var password: String = "Pass1234"
     private var email: String = "lucas@gmail.com"
     private var dateOfBirth: LocalDate = LocalDate.of(1994,3,12)
     private var contactNumber: Int = 1151214699
@@ -22,11 +23,11 @@ class UserBuilder {
     }
 
     fun build() : ClientUser {
-        return ClientUser(this.id, this.fullname, this.password, this.email, this.dateOfBirth, this.contactNumber, this.address)
+        return ClientUser(this.id, this.photo, this.fullname, this.password, this.email, this.dateOfBirth, this.contactNumber, this.address)
     }
 
     fun buildAdmin() : AdminUser {
-        return AdminUser(this.id, this.fullname, this.password, this.email, this.dateOfBirth, this.contactNumber, this.address)
+        return AdminUser(this.id, this.photo, this.fullname, this.password, this.email, this.dateOfBirth, this.contactNumber, this.address)
     }
 
 
@@ -66,6 +67,10 @@ class UserBuilder {
         return this
     }
 
+    fun withPhoto(aPhoto: String): UserBuilder {
+        this.photo = aPhoto
+        return this
+    }
 
 
 }

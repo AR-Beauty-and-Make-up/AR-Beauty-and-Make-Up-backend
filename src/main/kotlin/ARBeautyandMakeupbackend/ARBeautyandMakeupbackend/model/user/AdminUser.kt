@@ -11,13 +11,13 @@ import javax.persistence.InheritanceType
 class AdminUser : User {
 
 
-    constructor(fullname: String, password: String, email: String, dateOfBirth: LocalDate?, contactNumber: Int?, address: String?)
-            : super(fullname, password, email, dateOfBirth, contactNumber, address)  {
+    constructor(photo: String?, fullname: String, password: String, email: String, dateOfBirth: LocalDate?, contactNumber: Int?, address: String?)
+            : super(photo, fullname, password, email, dateOfBirth, contactNumber, address)  {
         this.isAdmin = true
     }
 
-    constructor(id:Long?, fullname: String, password: String, email: String, dateOfBirth: LocalDate?, contactNumber: Int?, address: String?)
-            : super(id, fullname, password, email, dateOfBirth, contactNumber, address)  {
+    constructor(id:Long?, photo: String?, fullname: String, password: String, email: String, dateOfBirth: LocalDate?, contactNumber: Int?, address: String?)
+            : super(id, photo, fullname, password, email, dateOfBirth, contactNumber, address)  {
         this.isAdmin = true
     }
 
