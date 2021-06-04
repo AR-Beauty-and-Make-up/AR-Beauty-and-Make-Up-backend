@@ -42,13 +42,12 @@ class TurnController {
     }
 
     @PostMapping("/turn")
-    fun createTurn(@RequestBody aTurn: Turn): HttpStatus {
-        turnService.addTurn(aTurn)
+    fun createTurn(@RequestBody aTurn: Turn): ResponseEntity<Turn> {
 
-        return HttpStatus.OK
+        return ResponseEntity.status(HttpStatus.OK).body(turnService.addTurn(aTurn))
     }
 
-    @PutMapping("turns/{id}")
+    @RequestMapping("turns/{id}", method = [RequestMethod.PUT])
     fun updateTurn(@RequestBody aTurn: Turn, @PathVariable("id") id: String): ResponseEntity<Turn>{
         var turnId = id.toLong()
         var turnToUpdate = turnService.updateTurn(turnId, aTurn)
@@ -56,13 +55,13 @@ class TurnController {
         return ResponseEntity.status(HttpStatus.OK).body(turnToUpdate)
     }
 
-    @DeleteMapping("turns/delete/{id}")
-    fun deleteTurn(@PathVariable("id") id: String): ResponseEntity<Turn>{
+    @RequestMapping("turns/delete/{id}", method = [RequestMethod.DELETE])
+    fun deleteTurn(@PathVariable("id") id: String): HttpStatus{
         var turnId = id.toLong()
         var aTurn = turnService.find(turnId)
         turnService.deleteTurn(aTurn)
 
-        return ResponseEntity.status(HttpStatus.OK).body(aTurn)
+        return HttpStatus.OK
     }
 
 
