@@ -28,7 +28,7 @@ class DatabaseInitializate : CommandLineRunner {
 
     override fun run(vararg args: String?) {
 
-        val turnLucas = Turn("Lucas Avalos", LocalDateTime.of(2021, 4, 26, 9, 0), Service.Mesoterapia, 123456789, "lucas@gmail.com")
+        val turnLucas = Turn("Lucas Avalos", LocalDateTime.of(2021, 6, 4, 9, 0), Service.Mesoterapia, 123456789, "lucas@gmail.com")
         val turnLuciana = Turn("Luciana Alonso", LocalDateTime.of(2021, 4, 20, 10, 30), Service.MasajeReductor, 1122334455, "luciana@gmail.com")
         val turnBelen = Turn("Belen Amat", LocalDateTime.of(2021, 4, 20, 15, 0), Service.Maquillaje, 987654321, "belen@gmail.com")
         val turnMicaela = Turn("Micaela Alonso", LocalDateTime.of(2021, 4, 26, 15, 0,0), Service.Mesoterapia, 123456789, "mica@gmail.com")

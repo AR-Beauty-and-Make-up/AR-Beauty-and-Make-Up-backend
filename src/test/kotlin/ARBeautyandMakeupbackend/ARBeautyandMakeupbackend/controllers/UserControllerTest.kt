@@ -2,6 +2,7 @@ package ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.controllers
 
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.builders.UserBuilder
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.user.ClientUser
+import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.services.UserService
 import org.json.JSONObject
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -16,6 +17,9 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
 class UserControllerTest() {
+
+    @Autowired
+    lateinit var userService: UserService
 
     @Autowired
     lateinit var mockMvc: MockMvc
@@ -65,6 +69,19 @@ class UserControllerTest() {
             .andExpect(MockMvcResultMatchers.jsonPath("$.email").value("beluamat@gmail.com"))
             .andExpect(MockMvcResultMatchers.jsonPath("$.isAdmin").value("false"))
             .andReturn()
+    }
+
+    @Test
+    fun creatingANewClientUserWithAlreadyExistingMailReturnsBadRequest(){
+        val newUser = UserBuilder.aUser().withEmail("belen@gmail.com").build()
+        userService.addUser(newUser)
+        val body = asJson(newUser)
+
+        mockMvc.perform(MockMvcRequestBuilders
+            .post("/users")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(body.toString()))
+            .andExpect(MockMvcResultMatchers.status().isBadRequest)
     }
 
     @Test
