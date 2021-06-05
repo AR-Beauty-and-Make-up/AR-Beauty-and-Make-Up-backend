@@ -1,5 +1,6 @@
 package ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.handlers
 
+import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.exceptions.NotAvailableEmailException
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.exceptions.NotFoundUserException
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -12,7 +13,12 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc
 class ExceptionHandlerAPI {
 
     @ExceptionHandler(NotFoundUserException::class)
-    fun notFoundUser(exception: Exception): ResponseEntity<String?>? {
+    fun notFoundUser(exception: Exception): ResponseEntity<String> {
         return ResponseEntity(exception.message, HttpStatus.NOT_FOUND)
+    }
+
+    @ExceptionHandler(NotAvailableEmailException::class)
+    fun mailAlreadyRegister(exception: Exception): ResponseEntity<String> {
+        return ResponseEntity(exception.message, HttpStatus.BAD_REQUEST)
     }
 }
