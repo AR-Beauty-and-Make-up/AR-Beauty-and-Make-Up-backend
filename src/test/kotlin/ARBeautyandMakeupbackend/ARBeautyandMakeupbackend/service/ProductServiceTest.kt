@@ -2,6 +2,7 @@ package ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.service
 
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.builders.ProductBuilder
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.category.Category
+import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.persistence.ProductPaginatedRepository
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.persistence.ProductRepository
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.services.ProductService
 import org.junit.Assert
@@ -12,6 +13,10 @@ import org.mockito.Mock
 import org.mockito.Mockito.`when`
 import org.mockito.junit.MockitoJUnitRunner
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.data.domain.PageImpl
+import org.springframework.data.domain.PageRequest
+import org.springframework.data.domain.Pageable
+import org.springframework.data.domain.Sort
 import java.util.*
 
 
@@ -21,6 +26,9 @@ class ProductServiceTest {
 
     @Mock
     lateinit var productRepositoryMock: ProductRepository
+
+    @Mock
+    lateinit var productPaginatedRepositoryMock: ProductPaginatedRepository
 
     @InjectMocks
     lateinit var productService: ProductService
@@ -66,4 +74,14 @@ class ProductServiceTest {
         Assert.assertEquals(listOfStringCategories.size, productService.getCategories().size)
     }
 
+    /*
+    @Test
+    fun whenWeAskProductServiceForProductsPaginatedRetunsPage1() {
+        val page = PageImpl(listOf(ProductBuilder.aProduct().build()))
+        val pageRequest = PageRequest.of(1, 1, Sort.Direction.ASC,"id")
+        `when`(productPaginatedRepositoryMock.findAll(pageRequest)).thenReturn(page)
+
+        Assert.assertEquals(page.size, productService.getProductPaginated(1, "id").size)
+    }
+*/
 }

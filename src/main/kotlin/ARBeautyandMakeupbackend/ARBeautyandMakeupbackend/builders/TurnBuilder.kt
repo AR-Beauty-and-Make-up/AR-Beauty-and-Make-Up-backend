@@ -1,5 +1,6 @@
 package ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.builders
 
+import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.service.Service
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.turn.Turn
 import java.time.LocalDateTime
 
@@ -7,9 +8,10 @@ class TurnBuilder {
 
     private var id: Long? =  null
     private var client: String = "Lucas Avalos"
-    private var date: LocalDateTime = LocalDateTime.of(2021, 4, 20, 16,0)
-    private var service: String = "Masajes"
+    private var date: LocalDateTime = LocalDateTime.of(2021, 4, 20, 16,0,0)
+    private var service: Service = Service.MasajeReductor
     private var contactNumber: Int = 1168686868
+    private var email: String = "lucas@gmail.com"
 
     companion object {
         fun aTurn(): TurnBuilder {
@@ -45,7 +47,7 @@ class TurnBuilder {
         return this
     }
 
-    fun withService(service: String): TurnBuilder {
+    fun withService(service: Service): TurnBuilder {
         this.service = service
         return this
     }
@@ -55,7 +57,12 @@ class TurnBuilder {
         return this
     }
 
+    fun withEmail(email: String): TurnBuilder {
+        this.email = email
+        return this
+    }
+
     fun build(): Turn {
-        return Turn(this.id, this.client, this.date, this.service, this.contactNumber)
+        return Turn(this.id, this.client, this.date, this.service, this.contactNumber, this.email)
     }
 }

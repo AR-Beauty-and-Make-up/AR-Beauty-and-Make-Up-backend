@@ -42,17 +42,12 @@ class TurnController {
     }
 
     @PostMapping("/turn")
-    fun createTurn(@RequestBody aTurn: JsonNode): HttpStatus {
-        var dateTime = aTurn["date"].toString().filterNot { it == '"' }
+    fun createTurn(@RequestBody aTurn: Turn): ResponseEntity<Turn> {
 
-
-        var newTurn = Turn(aTurn["name"].toString().filterNot { it == '"' }, LocalDateTime.parse(dateTime), aTurn["service"].toString().filterNot { it == '"' }, aTurn["tel"].asInt())
-        turnService.addTurn(newTurn)
-
-        return HttpStatus.OK
+        return ResponseEntity.status(HttpStatus.OK).body(turnService.addTurn(aTurn))
     }
 
-    @PutMapping("turns/{id}")
+    @RequestMapping("turns/{id}", method = [RequestMethod.PUT])
     fun updateTurn(@RequestBody aTurn: Turn, @PathVariable("id") id: String): ResponseEntity<Turn>{
         var turnId = id.toLong()
         var turnToUpdate = turnService.updateTurn(turnId, aTurn)
@@ -60,13 +55,13 @@ class TurnController {
         return ResponseEntity.status(HttpStatus.OK).body(turnToUpdate)
     }
 
-    @DeleteMapping("turns/delete/{id}")
-    fun deleteTurn(@PathVariable("id") id: String): ResponseEntity<Turn>{
+    @RequestMapping("turns/delete/{id}", method = [RequestMethod.DELETE])
+    fun deleteTurn(@PathVariable("id") id: String): HttpStatus{
         var turnId = id.toLong()
         var aTurn = turnService.find(turnId)
         turnService.deleteTurn(aTurn)
 
-        return ResponseEntity.status(HttpStatus.OK).body(aTurn)
+        return HttpStatus.OK
     }
 
 
