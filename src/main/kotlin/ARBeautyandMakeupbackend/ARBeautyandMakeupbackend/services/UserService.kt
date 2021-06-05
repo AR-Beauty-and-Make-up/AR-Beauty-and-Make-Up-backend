@@ -1,7 +1,7 @@
 package ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.services
 
-import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.exceptions.NotAvailableEmailException
-import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.exceptions.NotFoundUserException
+import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.handlers.NotFoundException
+import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.handlers.UserException
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.user.AdminUser
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.user.ClientUser
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.user.User
@@ -27,7 +27,7 @@ class UserService {
 
     private fun canAddUser(email: String) {
         if(userRepository.existsUserByEmail(email)){
-            throw NotAvailableEmailException("Mail already register")
+            throw UserException("Mail already register")
         }
     }
 
@@ -40,6 +40,6 @@ class UserService {
     }
 
     fun authenticateUser(email: String, password: String): User? {
-        return userRepository.findByEmailAndPassword(email, password) ?: throw NotFoundUserException("Invalid user or password")
+        return userRepository.findByEmailAndPassword(email, password) ?: throw NotFoundException("Invalid user or password")
     }
 }
