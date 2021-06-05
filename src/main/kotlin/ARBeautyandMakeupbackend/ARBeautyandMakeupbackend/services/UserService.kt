@@ -6,10 +6,13 @@ import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.user.ClientUser
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.user.User
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.persistence.UserRepository
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.security.core.userdetails.UserDetails
+import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 
 @Service
-class UserService {
+class UserService : UserDetailsService {
 
     @Autowired
     lateinit var userRepository: UserRepository
@@ -33,5 +36,11 @@ class UserService {
 
     fun authenticateUser(email: String, password: String): User? {
         return userRepository.findByEmailAndPassword(email, password) ?: throw NotFoundUserException("Invalid user or password")
+    }
+
+    @Transactional(readOnly = true)
+    override fun loadUserByUsername(email: String): UserDetails {
+        val user = userRepository.findByEmail(email)
+        return org.springframework.security.core.userdetails.User(user?.email, user?.password, emptyList())
     }
 }
