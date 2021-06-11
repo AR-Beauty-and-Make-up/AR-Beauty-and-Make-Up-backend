@@ -42,4 +42,13 @@ class UserService {
     fun authenticateUser(email: String, password: String): User? {
         return userRepository.findByEmailAndPassword(email, password) ?: throw NotFoundException("Invalid user or password")
     }
+
+    fun updateUser(id: Long, aUser: ClientUser): User {
+        val retrievedUser = getUser(id);
+        retrievedUser.fullname = aUser.fullname
+        retrievedUser.dateOfBirth = aUser.dateOfBirth
+        retrievedUser.address = aUser.address
+        retrievedUser.password = aUser.password
+        return userRepository.save(retrievedUser)
+    }
 }
