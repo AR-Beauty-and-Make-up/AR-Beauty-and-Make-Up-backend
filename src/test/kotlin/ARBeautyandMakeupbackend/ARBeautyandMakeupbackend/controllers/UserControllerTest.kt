@@ -114,7 +114,7 @@ class UserControllerTest() {
         val body = asJson(userToUpdated)
 
         mockMvc.perform(MockMvcRequestBuilders
-            .put("/users/1")
+            .put("/updateUser/1")
             .contentType(MediaType.APPLICATION_JSON)
             .content(body.toString()))
             .andExpect(MockMvcResultMatchers.status().isOk)
