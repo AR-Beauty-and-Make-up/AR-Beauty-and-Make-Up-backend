@@ -107,6 +107,20 @@ class UserControllerTest() {
             .andExpect(MockMvcResultMatchers.status().isNotFound)
     }
 
+    @Test
+    fun updatingAClientUserReturnsTheUserUpdatedAndStatusOk(){
+
+        val userToUpdated = UserBuilder.aUser().withFullname("Lucas Emiliano Avalos").build()
+        val body = asJson(userToUpdated)
+
+        mockMvc.perform(MockMvcRequestBuilders
+            .put("/users/1")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(body.toString()))
+            .andExpect(MockMvcResultMatchers.status().isOk)
+            .andExpect(MockMvcResultMatchers.jsonPath("$.fullname").value(userToUpdated.fullname))
+    }
+
     private fun userToFail(): JSONObject {
         val userToValidate = JSONObject()
         userToValidate.put("email", "lucas@gmail.com")

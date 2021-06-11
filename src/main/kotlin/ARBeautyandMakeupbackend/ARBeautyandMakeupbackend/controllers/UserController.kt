@@ -47,4 +47,10 @@ class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(aUser)
     }
 
+    @RequestMapping("/users/{id}", method = [RequestMethod.PUT])
+    fun updateUser(@RequestBody aUser: ClientUser, @PathVariable id: Long): ResponseEntity<User> {
+        val updatedUser = userService.updateUser(id, aUser)
+        return ResponseEntity.status(HttpStatus.OK).body(updatedUser)
+    }
+
 }
