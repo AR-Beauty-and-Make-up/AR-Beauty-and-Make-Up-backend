@@ -47,6 +47,7 @@ class UserService {
         val retrievedUser = getUser(id);
         retrievedUser.fullname = aUser.fullname
         retrievedUser.dateOfBirth = aUser.dateOfBirth
+        retrievedUser.contactNumber = aUser.contactNumber
         retrievedUser.address = aUser.address
         retrievedUser.password = aUser.password
         return userRepository.save(retrievedUser)
