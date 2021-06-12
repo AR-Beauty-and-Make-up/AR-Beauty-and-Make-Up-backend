@@ -13,25 +13,25 @@ class ClientUser : User {
     open var orders: MutableList<Product>
 
 
-    constructor(fullname: String, password: String, email: String, dateOfBirth: LocalDate?, contactNumber: Int?, address: String?)
-            : super(fullname, password, email, dateOfBirth, contactNumber, address)  {
+    constructor(photo: String?, fullname: String, password: String, email: String, dateOfBirth: LocalDate?, contactNumber: Int?, address: String?)
+            : super(photo, fullname, password, email, dateOfBirth, contactNumber, address)  {
         this.orders = arrayListOf()
     }
 
-    constructor(id:Long?, fullname: String, password: String, email: String, dateOfBirth: LocalDate?, contactNumber: Int?, address: String?)
-            : super(id, fullname, password, email, dateOfBirth, contactNumber, address)  {
+    constructor(id:Long?, photo: String?, fullname: String, password: String, email: String, dateOfBirth: LocalDate?, contactNumber: Int?, address: String?)
+            : super(id, photo, fullname, password, email, dateOfBirth, contactNumber, address)  {
         this.orders = arrayListOf()
     }
 
-    constructor(fullname: String, password: String,email: String, dateOfBirth: LocalDate?, contactNumber: Int?,
+    constructor(photo: String?, fullname: String, password: String,email: String, dateOfBirth: LocalDate?, contactNumber: Int?,
                 address: String?, orders: MutableList<Product>)
-            : super(fullname, password, email, dateOfBirth, contactNumber, address)  {
+            : super(photo, fullname, password, email, dateOfBirth, contactNumber, address)  {
         this.orders = orders
     }
 
-    constructor(id: Long?, fullname: String, password: String,email: String, dateOfBirth: LocalDate?,
+    constructor(id: Long?, photo: String?, fullname: String, password: String,email: String, dateOfBirth: LocalDate?,
                 contactNumber: Int?, address: String?, orders: MutableList<Product>)
-            : super(id, fullname, password, email, dateOfBirth, contactNumber, address)  {
+            : super(id, photo, fullname, password, email, dateOfBirth, contactNumber, address)  {
         this.orders = orders
     }
 

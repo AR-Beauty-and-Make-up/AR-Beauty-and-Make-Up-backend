@@ -90,8 +90,8 @@ class DatabaseInitializate : CommandLineRunner {
         productService.addProduct(productGelLipiadorCara3)
         productService.addProduct(productEspumaMicelar3)
 
-
-        val user = UserBuilder.aUser().build()
+        val photo = "https://scontent.feze12-1.fna.fbcdn.net/v/t1.6435-9/42743411_10217402236033253_5298019150923300864_n.jpg?_nc_cat=102&ccb=1-3&_nc_sid=09cbfe&_nc_eui2=AeHfxPwmHPJiM33kjui7QZ8J5GW77mO_KxPkZbvuY78rEwUyPMWjEPXhLUxOX8atDh0&_nc_ohc=ViXyES6I23kAX8t8hi3&_nc_ht=scontent.feze12-1.fna&oh=08e0bf940508955c0a61f65bc06e8b58&oe=60D40A97"
+        val user = UserBuilder.aUser().withPhoto(photo).build()
         val anotherUser = UserBuilder.aUser().withFullname("Luciana Alonso").withEmail("luciana@gamil.com").withConcatNumber(1144778899).build()
         val admin = UserBuilder.aUser().withFullname("Andrea Rudi").withConcatNumber(1162434990).withEmail("andrearudi@gmail.com").buildAdmin()
 
