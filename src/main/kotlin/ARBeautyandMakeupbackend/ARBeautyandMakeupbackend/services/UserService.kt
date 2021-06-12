@@ -1,6 +1,7 @@
 package ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.services
 
-import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.exceptions.NotFoundUserException
+import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.handlers.NotFoundException
+import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.handlers.UserException
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.user.AdminUser
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.user.ClientUser
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.user.User
@@ -23,7 +24,14 @@ class UserService : UserDetailsService {
     }
 
     fun addUser(clientUserUser : ClientUser) : ClientUser {
+        canAddUser(clientUserUser.email)
         return userRepository.save(clientUserUser)
+    }
+
+    private fun canAddUser(email: String) {
+        if(userRepository.existsUserByEmail(email)){
+            throw UserException("Mail already register")
+        }
     }
 
     fun getUsers(): List<User> {
@@ -35,7 +43,17 @@ class UserService : UserDetailsService {
     }
 
     fun authenticateUser(email: String, password: String): User? {
-        return userRepository.findByEmailAndPassword(email, password) ?: throw NotFoundUserException("Invalid user or password")
+        return userRepository.findByEmailAndPassword(email, password) ?: throw NotFoundException("Invalid user or password")
+    }
+
+    fun updateUser(id: Long, aUser: ClientUser): User {
+        val retrievedUser = getUser(id);
+        retrievedUser.fullname = aUser.fullname
+        retrievedUser.dateOfBirth = aUser.dateOfBirth
+        retrievedUser.contactNumber = aUser.contactNumber
+        retrievedUser.address = aUser.address
+        retrievedUser.password = aUser.password
+        return userRepository.save(retrievedUser)
     }
 
     @Transactional(readOnly = true)

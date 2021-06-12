@@ -8,7 +8,7 @@ class TurnBuilder {
 
     private var id: Long? =  null
     private var client: String = "Lucas Avalos"
-    private var date: LocalDateTime = LocalDateTime.of(2021, 4, 20, 16,0)
+    private var date: LocalDateTime = LocalDateTime.of(2021, 4, 20, 16,0,0)
     private var service: Service = Service.MasajeReductor
     private var contactNumber: Int = 1168686868
     private var email: String = "lucas@gmail.com"

@@ -37,4 +37,17 @@ class UserRepositoryTest {
         Assert.assertEquals(adminUser.fullname, retrievedAdminUser.fullname)
         Assert.assertTrue(retrievedAdminUser.isAdmin)
     }
+
+    @Test
+    fun testUserRepositoryUpdateAndRetrievedaClientUser(){
+        val clientUser: User = UserBuilder.aUser().build()
+        userRepository.save(clientUser)
+
+        val retrievedClientUser: User = userRepository.findById(clientUser.id!!).get()
+        retrievedClientUser.fullname = "Lucas Emiliano Avalos"
+
+        userRepository.save(retrievedClientUser)
+
+        Assert.assertEquals("Lucas Emiliano Avalos", retrievedClientUser.fullname)
+    }
 }

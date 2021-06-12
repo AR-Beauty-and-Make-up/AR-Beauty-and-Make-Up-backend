@@ -14,6 +14,7 @@ import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers
 import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -41,7 +42,7 @@ class TurnControllerTest {
             .content(body.toString()))
             .andExpect(MockMvcResultMatchers.status().isOk)
             .andExpect(MockMvcResultMatchers.jsonPath("$.clientName").value(aTurn.clientName))
-            //.andExpect(MockMvcResultMatchers.jsonPath("$.date").value(aTurn.date))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.date").value(dateFormat(aTurn.date)))
             .andExpect(MockMvcResultMatchers.jsonPath("$.service").value(aTurn.service.toString()))
             .andExpect(MockMvcResultMatchers.jsonPath("$.contactNumber").value(aTurn.contactNumber))
             .andExpect(MockMvcResultMatchers.jsonPath("$.email").value(aTurn.email))
@@ -58,7 +59,7 @@ class TurnControllerTest {
             .content(body.toString()))
             .andExpect(MockMvcResultMatchers.status().isOk)
             .andExpect(MockMvcResultMatchers.jsonPath("$.clientName").value(aTurn.clientName))
-            //.andExpect(MockMvcResultMatchers.jsonPath("$.date").value(aTurn.date))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.date").value(dateFormat(aTurn.date)))
             .andExpect(MockMvcResultMatchers.jsonPath("$.service").value(aTurn.service.toString())) //Si no lo paso a string, falla. Ver
             .andExpect(MockMvcResultMatchers.jsonPath("$.contactNumber").value(aTurn.contactNumber))
             .andExpect(MockMvcResultMatchers.jsonPath("$.email").value(aTurn.email))
@@ -70,7 +71,6 @@ class TurnControllerTest {
             .andExpect(MockMvcResultMatchers.status().isOk)
     }
 
-
     private fun genereteTurnBody(aTurn: Turn): JSONObject {
         var jsonTurn = JSONObject()
         jsonTurn.put("clientName", aTurn.clientName)
@@ -80,6 +80,10 @@ class TurnControllerTest {
         jsonTurn.put("email", aTurn.email)
 
         return jsonTurn
+    }
+
+    private fun dateFormat(date: LocalDateTime): String {
+        return date.toLocalDate().toString() + " " + date.toLocalTime().toString() + ":00"
     }
 
 
