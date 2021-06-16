@@ -8,4 +8,4 @@ import org.springframework.web.bind.annotation.ResponseStatus
 class NotFoundException(message: String) : RuntimeException(message)
 
 @ResponseStatus(HttpStatus.BAD_REQUEST)
-class UserException(message: String) : RuntimeException(message)
+class BadRequestException(message: String) : RuntimeException(message)

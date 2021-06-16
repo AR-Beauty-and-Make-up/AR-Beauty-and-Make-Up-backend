@@ -2,6 +2,7 @@ package ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.controllers
 
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.builders.TurnBuilder
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.turn.Turn
+import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.services.TurnService
 import org.json.JSONObject
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -14,13 +15,15 @@ import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers
 import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
 @RunWith(SpringRunner::class)
 class TurnControllerTest {
+
+    @Autowired
+    lateinit var turnService: TurnService
 
     @Autowired
     lateinit var mockMvc: MockMvc
@@ -35,7 +38,7 @@ class TurnControllerTest {
     @Test
     fun addedANewTurnWeGetStatusOK(){
         var aTurn = TurnBuilder.aTurn().withName("German Dos Santos").withEmail("german@gmail.com").withDate(LocalDateTime.of(2021, 5, 27, 9,0)).build()
-        val body = genereteTurnBody(aTurn)
+        val body = generateTurnBody(aTurn)
 
         mockMvc.perform(MockMvcRequestBuilders.post("/turn")
             .contentType(MediaType.APPLICATION_JSON)
@@ -50,9 +53,9 @@ class TurnControllerTest {
 
     @Test
     fun ifWeEditATurnReturnsTheUpdatedTurn(){
-        val aTurn = TurnBuilder.aTurn().withContactClient(1177889944).build()
+        val aTurn = TurnBuilder.aTurn().withDate(LocalDateTime.of(2021, 6, 4, 9, 0)).withContactClient(1177889944).build()
 
-        val body = genereteTurnBody(aTurn)
+        val body = generateTurnBody(aTurn)
 
         mockMvc.perform(MockMvcRequestBuilders.put("/turns/1")
             .contentType(MediaType.APPLICATION_JSON)
@@ -71,7 +74,20 @@ class TurnControllerTest {
             .andExpect(MockMvcResultMatchers.status().isOk)
     }
 
-    private fun genereteTurnBody(aTurn: Turn): JSONObject {
+    @Test
+    fun addingATurnOnADateAlreadyTakenReturnsBadRequest(){
+        val newTurn = TurnBuilder.aTurn().withDate(LocalDateTime.of(2021, 6, 20, 9, 0)).build()
+        turnService.addTurn(newTurn)
+        var anotherTurn = TurnBuilder.aTurn().withName("German Dos Santos").withEmail("german@gmail.com").withDate(LocalDateTime.of(2021, 6, 20, 9, 0)).build()
+        val body = generateTurnBody(anotherTurn)
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/turn")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(body.toString()))
+            .andExpect(MockMvcResultMatchers.status().isBadRequest)
+    }
+
+    private fun generateTurnBody(aTurn: Turn): JSONObject {
         var jsonTurn = JSONObject()
         jsonTurn.put("clientName", aTurn.clientName)
         jsonTurn.put("date", aTurn.date)

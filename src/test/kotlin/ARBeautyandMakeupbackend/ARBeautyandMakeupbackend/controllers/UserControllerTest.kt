@@ -25,14 +25,14 @@ class UserControllerTest() {
     lateinit var mockMvc: MockMvc
 
     @Test
-    fun anotheraskingForAUserByIdReturnsTheUserAnd200Status() {
+    fun askingForAUserByIdReturnsTheUserAnd200Status() {
         mockMvc.perform(MockMvcRequestBuilders
             .get("/user/1")
             .contentType(MediaType.APPLICATION_JSON))
             .andExpect(MockMvcResultMatchers.status().isOk)
             .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(MockMvcResultMatchers.jsonPath("$.fullname").value("Lucas Avalos"))
-            .andExpect(MockMvcResultMatchers.jsonPath("$.password").value("password"))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.password").value("Pass1234"))
             .andExpect(MockMvcResultMatchers.jsonPath("$.contactNumber").value("1151214699"))
             .andExpect(MockMvcResultMatchers.jsonPath("$.email").value("lucas@gmail.com"))
             .andExpect(MockMvcResultMatchers.jsonPath("$.isAdmin").value("false"))
@@ -46,7 +46,7 @@ class UserControllerTest() {
             .andExpect(MockMvcResultMatchers.status().isOk)
             .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(MockMvcResultMatchers.jsonPath("$.fullname").value("Andrea Rudi"))
-            .andExpect(MockMvcResultMatchers.jsonPath("$.password").value("password"))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.password").value("Pass1234"))
             .andExpect(MockMvcResultMatchers.jsonPath("$.contactNumber").value("1162434990"))
             .andExpect(MockMvcResultMatchers.jsonPath("$.email").value("andrearudi@gmail.com"))
             .andExpect(MockMvcResultMatchers.jsonPath("$.isAdmin").value("true"))

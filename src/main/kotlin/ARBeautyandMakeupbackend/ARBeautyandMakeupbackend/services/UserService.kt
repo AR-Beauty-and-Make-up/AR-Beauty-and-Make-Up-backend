@@ -1,7 +1,7 @@
 package ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.services
 
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.handlers.NotFoundException
-import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.handlers.UserException
+import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.handlers.BadRequestException
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.user.AdminUser
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.user.ClientUser
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.user.User
@@ -30,7 +30,7 @@ class UserService : UserDetailsService {
 
     private fun canAddUser(email: String) {
         if(userRepository.existsUserByEmail(email)){
-            throw UserException("Mail already register")
+            throw BadRequestException("Mail already register")
         }
     }
 
