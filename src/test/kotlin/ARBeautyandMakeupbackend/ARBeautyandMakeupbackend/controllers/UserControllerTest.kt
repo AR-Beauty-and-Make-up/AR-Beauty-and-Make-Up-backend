@@ -31,7 +31,7 @@ class UserControllerTest() {
             .contentType(MediaType.APPLICATION_JSON))
             .andExpect(MockMvcResultMatchers.status().isOk)
             .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
-            .andExpect(MockMvcResultMatchers.jsonPath("$.fullname").value("Lucas Emiliano Avalos"))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.fullname").value("Lucas Avalos"))
             .andExpect(MockMvcResultMatchers.jsonPath("$.password").value("Pass1234"))
             .andExpect(MockMvcResultMatchers.jsonPath("$.contactNumber").value("1151214699"))
             .andExpect(MockMvcResultMatchers.jsonPath("$.email").value("lucas@gmail.com"))

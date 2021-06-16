@@ -76,9 +76,9 @@ class TurnControllerTest {
 
     @Test
     fun addingATurnOnADateAlreadyTakenReturnsBadRequest(){
-        val newTurn = TurnBuilder.aTurn().withDate(LocalDateTime.of(2021, 6, 4, 9, 0)).build()
+        val newTurn = TurnBuilder.aTurn().withDate(LocalDateTime.of(2021, 6, 20, 9, 0)).build()
         turnService.addTurn(newTurn)
-        var anotherTurn = TurnBuilder.aTurn().withName("German Dos Santos").withEmail("german@gmail.com").withDate(LocalDateTime.of(2021, 6, 4, 9, 0)).build()
+        var anotherTurn = TurnBuilder.aTurn().withName("German Dos Santos").withEmail("german@gmail.com").withDate(LocalDateTime.of(2021, 6, 20, 9, 0)).build()
         val body = generateTurnBody(anotherTurn)
 
         mockMvc.perform(MockMvcRequestBuilders.post("/turn")
