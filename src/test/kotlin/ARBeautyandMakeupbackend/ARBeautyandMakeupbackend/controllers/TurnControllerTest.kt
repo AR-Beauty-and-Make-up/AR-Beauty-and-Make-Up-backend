@@ -53,7 +53,7 @@ class TurnControllerTest {
 
     @Test
     fun ifWeEditATurnReturnsTheUpdatedTurn(){
-        val aTurn = TurnBuilder.aTurn().withContactClient(1177889944).build()
+        val aTurn = TurnBuilder.aTurn().withDate(LocalDateTime.of(2021, 6, 4, 9, 0)).withContactClient(1177889944).build()
 
         val body = generateTurnBody(aTurn)
 

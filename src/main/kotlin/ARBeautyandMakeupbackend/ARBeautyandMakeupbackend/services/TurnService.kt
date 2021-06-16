@@ -24,12 +24,6 @@ class TurnService {
         return turnRepository.save(aTurn)
     }
 
-    private fun canAddTurn(aDate: LocalDateTime) {
-        if (getTurns().stream().anyMatch { turn -> turn.date == aDate }) {
-            throw BadRequestException("A turn already exisist on this date")
-        }
-    }
-
     fun find(id: Long): Turn {
 
         return turnRepository.findById(id).get()
@@ -42,6 +36,9 @@ class TurnService {
     fun updateTurn(id: Long, aTurn: Turn): Turn {
         val retrievedTurn: Turn = this.find(id)
 
+        if(retrievedTurn.date != aTurn.date){
+            canAddTurn(retrievedTurn.date)
+        }
         retrievedTurn.clientName = aTurn.clientName
         retrievedTurn.date = aTurn.date
         retrievedTurn.service = aTurn.service
@@ -56,6 +53,12 @@ class TurnService {
 
     fun getDates(): List<String> {
         return turnRepository.getDates()
+    }
+
+    private fun canAddTurn(aDate: LocalDateTime) {
+        if (getTurns().stream().anyMatch { turn -> turn.date == aDate }) {
+            throw BadRequestException("A turn already exisist on this date")
+        }
     }
 
 
