@@ -27,6 +27,8 @@ dependencies {
     implementation("junit:junit:4.12")
 	implementation("io.jsonwebtoken:jjwt:0.7.0")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+	implementation("javax.xml.bind:jaxb-api:2.3.0")
+	implementation("com.mercadopago:sdk-java:1.9.1")
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	runtimeOnly("com.h2database:h2")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")

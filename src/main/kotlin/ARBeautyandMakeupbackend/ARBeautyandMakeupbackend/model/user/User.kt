@@ -1,15 +1,16 @@
 package ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.user
 
 
+import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.purchase.Purchase
 import com.fasterxml.jackson.annotation.JsonAutoDetect
 import java.time.LocalDate
-import java.time.LocalDateTime
 import javax.persistence.*
 
 
 @Entity
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 abstract class User {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -52,4 +53,5 @@ abstract class User {
         this.isAdmin = false
     }
 
+    abstract fun addPurchase(aPurchase: Purchase)
 }

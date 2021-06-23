@@ -1,39 +1,41 @@
 package ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.user
 
-import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.product.Product
+import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.purchase.Purchase
 import java.time.LocalDate
-import java.time.LocalDateTime
 import javax.persistence.*
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 class ClientUser : User {
 
-    @OneToMany(fetch = FetchType.EAGER)
-    open var orders: MutableList<Product>
+    @OneToMany(cascade = [CascadeType.ALL])
+    open var purchases: MutableList<Purchase>
 
 
     constructor(photo: String?, fullname: String, password: String, email: String, dateOfBirth: LocalDate?, contactNumber: Int?, address: String?)
             : super(photo, fullname, password, email, dateOfBirth, contactNumber, address)  {
-        this.orders = arrayListOf()
+        this.purchases = mutableListOf()
     }
 
     constructor(id:Long?, photo: String?, fullname: String, password: String, email: String, dateOfBirth: LocalDate?, contactNumber: Int?, address: String?)
             : super(id, photo, fullname, password, email, dateOfBirth, contactNumber, address)  {
-        this.orders = arrayListOf()
+        this.purchases = mutableListOf()
     }
 
     constructor(photo: String?, fullname: String, password: String,email: String, dateOfBirth: LocalDate?, contactNumber: Int?,
-                address: String?, orders: MutableList<Product>)
+                address: String?, orders: MutableList<Purchase>)
             : super(photo, fullname, password, email, dateOfBirth, contactNumber, address)  {
-        this.orders = orders
+        this.purchases = orders
     }
 
-    constructor(id: Long?, photo: String?, fullname: String, password: String,email: String, dateOfBirth: LocalDate?,
-                contactNumber: Int?, address: String?, orders: MutableList<Product>)
+    constructor(id: Long?, photo: String?, fullname: String, password: String, email: String, dateOfBirth: LocalDate?,
+                contactNumber: Int?, address: String?, orders: MutableList<Purchase>)
             : super(id, photo, fullname, password, email, dateOfBirth, contactNumber, address)  {
-        this.orders = orders
+        this.purchases = orders
     }
 
+    override fun addPurchase(aPurchase: Purchase) {
+        this.purchases.add(aPurchase)
+    }
 
 }

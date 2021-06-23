@@ -1,10 +1,12 @@
 package ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.builders
 
+import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.purchase.Purchase
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.user.AdminUser
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.user.ClientUser
 import java.time.LocalDate
 
 class UserBuilder {
+
 
     private var id: Long? = null
     private var photo: String? = null
@@ -14,7 +16,7 @@ class UserBuilder {
     private var dateOfBirth: LocalDate = LocalDate.of(1994,3,12)
     private var contactNumber: Int = 1151214699
     private var address: String = "Calle Falsa 123, Berna, Buenos Aires (1879)"
-
+    private var purchases: MutableList<Purchase> = mutableListOf(PurchaseBuilder.aPurchase().build())
 
     companion object {
         fun aUser(): UserBuilder {
@@ -23,7 +25,7 @@ class UserBuilder {
     }
 
     fun build() : ClientUser {
-        return ClientUser(this.id, this.photo, this.fullname, this.password, this.email, this.dateOfBirth, this.contactNumber, this.address)
+        return ClientUser(this.id, this.photo, this.fullname, this.password, this.email, this.dateOfBirth, this.contactNumber, this.address, this.purchases)
     }
 
     fun buildAdmin() : AdminUser {
@@ -69,6 +71,11 @@ class UserBuilder {
 
     fun withPhoto(aPhoto: String): UserBuilder {
         this.photo = aPhoto
+        return this
+    }
+
+    fun withPurchases(purchases: MutableList<Purchase>): UserBuilder {
+        this.purchases = purchases
         return this
     }
 
