@@ -13,11 +13,13 @@ import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers
+import org.springframework.transaction.annotation.Transactional
 
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@Transactional
 class UserControllerTest() {
 
     @Autowired
@@ -28,8 +30,11 @@ class UserControllerTest() {
 
     @Test
     fun askingForAUserByIdReturnsTheUserAnd200Status() {
+        val clientUser = UserBuilder.aUser().build()
+        val retrievedUser = userService.addUser(clientUser)
+
         mockMvc.perform(MockMvcRequestBuilders
-            .get("/user/1")
+            .get("/user/" + retrievedUser.id)
             .contentType(MediaType.APPLICATION_JSON))
             .andExpect(MockMvcResultMatchers.status().isOk)
             .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
@@ -38,12 +43,16 @@ class UserControllerTest() {
             .andExpect(MockMvcResultMatchers.jsonPath("$.contactNumber").value("1151214699"))
             .andExpect(MockMvcResultMatchers.jsonPath("$.email").value("lucas@gmail.com"))
             .andExpect(MockMvcResultMatchers.jsonPath("$.isAdmin").value("false"))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.address").value("Calle Falsa 123, Berna, Buenos Aires (1879)"))
     }
 
     @Test
     fun askingForAAdminUserByIdReturnsTheAdminUserAnd200Status() {
+        val adminUser = UserBuilder.aUser().withFullname("Andrea Rudi").withConcatNumber(1162434990).withEmail("andrearudi@gmail.com").buildAdmin()
+        val retrievedUser = userService.addAdminUser(adminUser)
+
         mockMvc.perform(MockMvcRequestBuilders
-            .get("/user/3")
+            .get("/user/" + retrievedUser.id)
             .contentType(MediaType.APPLICATION_JSON))
             .andExpect(MockMvcResultMatchers.status().isOk)
             .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
@@ -88,7 +97,8 @@ class UserControllerTest() {
 
     @Test
     fun  aUserIsValidatedIfItsEmailMatchesWithItsPassword(){
-        val body = userToValidate(UserBuilder.aUser().build())
+        val user = userService.addUser(UserBuilder.aUser().build())
+        val body = userToValidate(user)
 
         mockMvc.perform(MockMvcRequestBuilders
             .post("/validateUser")
@@ -111,12 +121,12 @@ class UserControllerTest() {
 
     @Test
     fun updatingAClientUserReturnsTheUserUpdatedAndStatusOk(){
-
+        val retrievedUser = userService.addUser(UserBuilder.aUser().build())
         val userToUpdated = UserBuilder.aUser().withFullname("Lucas Emiliano Avalos").build()
         val body = asJson(userToUpdated)
 
         mockMvc.perform(MockMvcRequestBuilders
-            .put("/updateUser/1")
+            .put("/updateUser/" + retrievedUser.id)
             .contentType(MediaType.APPLICATION_JSON)
             .content(body.toString()))
             .andExpect(MockMvcResultMatchers.status().isOk)

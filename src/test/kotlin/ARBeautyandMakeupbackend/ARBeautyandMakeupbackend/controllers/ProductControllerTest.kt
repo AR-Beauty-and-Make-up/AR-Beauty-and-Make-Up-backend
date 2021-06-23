@@ -1,5 +1,8 @@
 package ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.controllers
 
+import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.builders.ProductBuilder
+import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.category.Category
+import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.services.ProductService
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
@@ -11,13 +14,18 @@ import org.springframework.test.context.junit4.SpringRunner
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers
+import org.springframework.transaction.annotation.Transactional
 
 
 @SpringBootTest
 @RunWith(SpringRunner::class)
 @AutoConfigureMockMvc
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@Transactional
 class ProductControllerTest {
+
+    @Autowired
+    lateinit var productService: ProductService
 
     @Autowired
     lateinit var mockMvc: MockMvc
@@ -34,6 +42,13 @@ class ProductControllerTest {
 
     @Test
     fun ifWeAskForProductsOfASpecificCategoryWeGetAllProductsWithThatCategory(){
+        val product1 = ProductBuilder.aProduct().build()
+        val product2 = ProductBuilder.aProduct().withName("Agua Micelar").build()
+        val product3 = ProductBuilder.aProduct().withName("Crema para manos").build()
+        productService.addProduct(product1)
+        productService.addProduct(product2)
+        productService.addProduct(product3)
+
         mockMvc.perform(MockMvcRequestBuilders.get("/products/Cremas")
             .contentType(MediaType.APPLICATION_JSON))
             .andExpect(MockMvcResultMatchers.status().isOk)
@@ -41,12 +56,17 @@ class ProductControllerTest {
             .andExpect(MockMvcResultMatchers.jsonPath("$.[0].category").value("Cremas"))
             .andExpect(MockMvcResultMatchers.jsonPath("$.[1].category").value("Cremas"))
             .andExpect(MockMvcResultMatchers.jsonPath("$.[2].category").value("Cremas"))
-            .andExpect(MockMvcResultMatchers.jsonPath("$.[3].category").value("Cremas"))
-            .andExpect(MockMvcResultMatchers.jsonPath("$.[4].category").value("Cremas"))
     }
 
     @Test
     fun ifWeAskForAllCateogriesOfProductsWeGetAllCategoriesAnd200Satus(){
+        val product1 = ProductBuilder.aProduct().build()
+        val product2 = ProductBuilder.aProduct().withName("Agua Micelar").build()
+        val product3 = ProductBuilder.aProduct().withCategory(Category.Maquillaje).build()
+        productService.addProduct(product1)
+        productService.addProduct(product2)
+        productService.addProduct(product3)
+
         mockMvc.perform(MockMvcRequestBuilders.get("/categories")
             .contentType(MediaType.APPLICATION_JSON))
             .andExpect(MockMvcResultMatchers.status().isOk)

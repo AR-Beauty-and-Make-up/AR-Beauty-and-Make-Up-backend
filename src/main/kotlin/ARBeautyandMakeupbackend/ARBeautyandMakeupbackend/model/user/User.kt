@@ -3,12 +3,12 @@ package ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.user
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect
 import java.time.LocalDate
-import java.time.LocalDateTime
 import javax.persistence.*
 
 
 @Entity
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
+@Table(name = "users")
 abstract class User {
 
     @Id

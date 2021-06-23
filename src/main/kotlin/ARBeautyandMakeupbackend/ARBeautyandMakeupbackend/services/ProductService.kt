@@ -32,7 +32,7 @@ class ProductService {
     }
 
     fun findAllByACategory(aCategory: Category): List<Product> {
-        return productRepository.findAllByACategory(aCategory.toString())
+        return productRepository.findAllByCategory(aCategory)
     }
 
     fun getCategories(): List<String> {

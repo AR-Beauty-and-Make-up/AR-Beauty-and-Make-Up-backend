@@ -59,7 +59,7 @@ class ProductServiceTest {
     @Test
     fun whenWeAskProductServiceForAllProductsWithACategoryReturnsAListOfProduct() {
         val listOfProductsWithDifrentCategory = ProductBuilder.productListWithDifrentCategory()
-        `when`(productRepositoryMock.findAllByACategory("Cremas")).thenReturn(listOfProductsWithDifrentCategory)
+        `when`(productRepositoryMock.findAllByCategory(Category.Cremas)).thenReturn(listOfProductsWithDifrentCategory)
 
         Assert.assertEquals(listOfProductsWithDifrentCategory.size, productService.findAllByACategory(Category.Cremas).size)
     }
