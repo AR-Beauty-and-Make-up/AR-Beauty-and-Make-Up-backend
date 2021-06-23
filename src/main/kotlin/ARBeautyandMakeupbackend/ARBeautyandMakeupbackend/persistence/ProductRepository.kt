@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository
 @Repository
 interface ProductRepository : JpaRepository<Product, Long> {
 
-    //@Query(value = "SELECT * FROM PRODUCT product WHERE product.category = :aCategory", nativeQuery = true)
     fun findAllByCategory(category: Category): List<Product>
 
     @Query(value = "SELECT DISTINCT Category FROM PRODUCT", nativeQuery = true)
