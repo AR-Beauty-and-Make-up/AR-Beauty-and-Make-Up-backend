@@ -73,18 +73,18 @@ class UserTest {
 
     @Test
     fun aUserHasAListOfPurchases(){
-        val aPurchase = Purchase(LocalDate.now(), mutableListOf())
-        val purchases = mutableListOf(aPurchase)
+        val aPurchase = Purchase(LocalDate.now(), mutableSetOf())
+        val purchases = mutableSetOf(aPurchase)
         val aUser = UserBuilder.aUser().withPurchases(purchases).build()
         Assert.assertEquals(aUser.purchases.size, 1)
     }
 
     @Test
     fun aPurchaseWasAddedToUser() {
-        val aUser = UserBuilder.aUser().withPurchases(mutableListOf()).build()
+        val aUser = UserBuilder.aUser().withPurchases(mutableSetOf()).build()
         Assert.assertEquals(aUser.purchases.size, 0)
 
-        val aPurchase = Purchase(LocalDate.now(), mutableListOf())
+        val aPurchase = Purchase(LocalDate.now(), mutableSetOf())
 
         aUser.addPurchase(aPurchase)
 

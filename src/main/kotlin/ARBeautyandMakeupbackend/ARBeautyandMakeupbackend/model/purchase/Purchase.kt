@@ -13,31 +13,19 @@ class Purchase {
     open var id : Long?
     open var date : LocalDate
 
-    @OneToMany(cascade = [CascadeType.ALL])
-    open var purchaseItems : MutableList<ItemPurchase>
+    @OneToMany(cascade = [CascadeType.ALL], fetch = FetchType.EAGER)
+    open var purchaseItems : Set<ItemPurchase>
 
-    constructor(id : Long?, date : LocalDate, purchaseItems : MutableList<ItemPurchase>) {
+    constructor(id : Long?, date : LocalDate, purchaseItems : Set<ItemPurchase>) {
         this.id = id
         this.date = date
         this.purchaseItems = purchaseItems
     }
 
-    constructor(date : LocalDate, purchaseItems : MutableList<ItemPurchase>) {
+    constructor(date : LocalDate, purchaseItems : Set<ItemPurchase>) {
         this.id = null
         this.date = date
         this.purchaseItems = purchaseItems
-    }
-
-    constructor(id : Long?, date : LocalDate) {
-        this.id = id
-        this.date = date
-        this.purchaseItems = mutableListOf()
-    }
-
-    constructor(date : LocalDate) {
-        this.id = null
-        this.date = date
-        this.purchaseItems = mutableListOf()
     }
 
 }

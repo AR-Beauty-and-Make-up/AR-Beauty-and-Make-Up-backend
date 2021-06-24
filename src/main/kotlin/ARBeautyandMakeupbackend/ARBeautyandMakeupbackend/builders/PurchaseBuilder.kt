@@ -8,7 +8,10 @@ class PurchaseBuilder {
 
     private var id: Long? = null
     private var date: LocalDate = LocalDate.now()
-    private var purchaseItems: MutableList<ItemPurchase> = mutableListOf(ItemPurchase(ProductBuilder.aProduct().build(), 1))
+    private var purchaseItems: Set<ItemPurchase> = setOf(
+            ItemPurchase(ProductBuilder.aProduct().build(), 1),
+            ItemPurchase(ProductBuilder.aProduct().build(), 1)
+    )
 
 
     companion object {
@@ -31,7 +34,7 @@ class PurchaseBuilder {
         return this
     }
 
-    fun withPurchaseItems(purchaseItems: MutableList<ItemPurchase>) : PurchaseBuilder {
+    fun withPurchaseItems(purchaseItems: Set<ItemPurchase>) : PurchaseBuilder {
         this.purchaseItems = purchaseItems
         return this
     }

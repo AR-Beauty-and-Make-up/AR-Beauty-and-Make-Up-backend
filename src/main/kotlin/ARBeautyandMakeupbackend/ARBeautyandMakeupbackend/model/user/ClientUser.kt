@@ -8,28 +8,28 @@ import javax.persistence.*
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 class ClientUser : User {
 
-    @OneToMany(cascade = [CascadeType.ALL])
-    open var purchases: MutableList<Purchase>
+    @OneToMany(cascade = [CascadeType.ALL], fetch = FetchType.EAGER)
+    open var purchases: MutableSet<Purchase>
 
 
     constructor(photo: String?, fullname: String, password: String, email: String, dateOfBirth: LocalDate?, contactNumber: Int?, address: String?)
             : super(photo, fullname, password, email, dateOfBirth, contactNumber, address)  {
-        this.purchases = mutableListOf()
+        this.purchases = mutableSetOf()
     }
 
     constructor(id:Long?, photo: String?, fullname: String, password: String, email: String, dateOfBirth: LocalDate?, contactNumber: Int?, address: String?)
             : super(id, photo, fullname, password, email, dateOfBirth, contactNumber, address)  {
-        this.purchases = mutableListOf()
+        this.purchases = mutableSetOf()
     }
 
     constructor(photo: String?, fullname: String, password: String,email: String, dateOfBirth: LocalDate?, contactNumber: Int?,
-                address: String?, orders: MutableList<Purchase>)
+                address: String?, orders: MutableSet<Purchase>)
             : super(photo, fullname, password, email, dateOfBirth, contactNumber, address)  {
         this.purchases = orders
     }
 
     constructor(id: Long?, photo: String?, fullname: String, password: String, email: String, dateOfBirth: LocalDate?,
-                contactNumber: Int?, address: String?, orders: MutableList<Purchase>)
+                contactNumber: Int?, address: String?, orders: MutableSet<Purchase>)
             : super(id, photo, fullname, password, email, dateOfBirth, contactNumber, address)  {
         this.purchases = orders
     }

@@ -12,7 +12,7 @@ class ItemPurchase {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     open var id : Long?
 
-    @ManyToOne(cascade = [CascadeType.ALL])
+    @ManyToOne(cascade = [CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.REMOVE, CascadeType.DETACH], fetch = FetchType.EAGER)
     open var product : Product
     open var quantity : Int
 
