@@ -1,4 +1,4 @@
-/*package ARBeautyandMakeupbackend.ARBeautyandMakeupbackend
+package ARBeautyandMakeupbackend.ARBeautyandMakeupbackend/*package ARBeautyandMakeupbackend.ARBeautyandMakeupbackend
 
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.builders.UserBuilder
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.category.Category

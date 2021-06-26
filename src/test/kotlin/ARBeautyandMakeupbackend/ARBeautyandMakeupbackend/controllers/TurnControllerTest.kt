@@ -57,11 +57,15 @@ class TurnControllerTest {
 
     @Test
     fun ifWeEditATurnReturnsTheUpdatedTurn(){
-        val aTurn = TurnBuilder.aTurn().withDate(LocalDateTime.of(2021, 7, 4, 9, 0)).withContactClient(1177889944).build()
+        val aTurn = TurnBuilder.aTurn().withId(1).withDate(LocalDateTime.of(2021, 7, 4, 9, 0)).withContactClient(1177889944).build()
+
+        val savedTurn = this.turnService.addTurn(aTurn)
+
+        aTurn.date = LocalDateTime.of(2021, 8, 4, 9, 0)
 
         val body = generateTurnBody(aTurn)
 
-        mockMvc.perform(MockMvcRequestBuilders.put("/turns/3")
+        mockMvc.perform(MockMvcRequestBuilders.put("/turns/" + savedTurn.id)
             .contentType(MediaType.APPLICATION_JSON)
             .content(body.toString()))
             .andExpect(MockMvcResultMatchers.status().isOk)
@@ -74,14 +78,21 @@ class TurnControllerTest {
 
     @Test
     fun ifWeDeleteATurnReturnsStatus200(){
-        mockMvc.perform(MockMvcRequestBuilders.delete("/turns/delete/2"))
+
+        val aTurn = TurnBuilder.aTurn().withId(1).withDate(LocalDateTime.of(2021, 7, 4, 9, 0)).withContactClient(1177889944).build()
+
+        val savedTurn = this.turnService.addTurn(aTurn)
+
+        mockMvc.perform(MockMvcRequestBuilders.delete("/turns/delete/" + savedTurn.id))
             .andExpect(MockMvcResultMatchers.status().isOk)
     }
 
     @Test
     fun addingATurnOnADateAlreadyTakenReturnsBadRequest(){
-        var anotherTurn = TurnBuilder.aTurn().withName("German Dos Santos").withEmail("german@gmail.com").withDate(LocalDateTime.of(2021, 6, 20, 9, 0)).build()
-        val body = generateTurnBody(anotherTurn)
+        var turn = TurnBuilder.aTurn().withName("German Dos Santos").withEmail("german@gmail.com").withDate(LocalDateTime.of(2021, 6, 20, 9, 0)).build()
+        val body = generateTurnBody(turn)
+        
+        this.turnService.addTurn(turn)
 
         mockMvc.perform(MockMvcRequestBuilders.post("/turn")
             .contentType(MediaType.APPLICATION_JSON)
