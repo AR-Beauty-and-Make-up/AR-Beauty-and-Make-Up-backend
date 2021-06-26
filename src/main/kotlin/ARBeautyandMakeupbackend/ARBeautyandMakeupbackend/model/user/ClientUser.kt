@@ -2,14 +2,13 @@ package ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.user
 
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.product.Product
 import java.time.LocalDate
-import java.time.LocalDateTime
 import javax.persistence.*
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 class ClientUser : User {
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(cascade = [CascadeType.ALL], fetch = FetchType.EAGER)
     open var orders: MutableList<Product>
 
 

@@ -17,7 +17,7 @@ repositories {
 }
 
 dependencies {
-	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+	compile("org.springframework.boot:spring-boot-starter-aop")
 	implementation("org.springframework.boot:spring-boot-starter-mail")
 	implementation("org.springframework.boot:spring-boot-starter-security")
 	implementation("org.springframework.boot:spring-boot-starter-web")
@@ -27,8 +27,12 @@ dependencies {
     implementation("junit:junit:4.12")
 	implementation("io.jsonwebtoken:jjwt:0.7.0")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+	implementation("org.postgresql:postgresql:42.2.22")
+	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+	implementation("com.zaxxer:HikariCP:4.0.3")
+
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
-	runtimeOnly("com.h2database:h2")
+	runtimeOnly("org.postgresql:postgresql")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.springframework.security:spring-security-test")
 }

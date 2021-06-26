@@ -37,7 +37,7 @@ class TurnService {
         val retrievedTurn: Turn = this.find(id)
 
         if(retrievedTurn.date != aTurn.date){
-            canAddTurn(retrievedTurn.date)
+            canAddTurn(aTurn.date)
         }
         retrievedTurn.clientName = aTurn.clientName
         retrievedTurn.date = aTurn.date
