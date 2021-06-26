@@ -4,7 +4,6 @@ import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.category.Category
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.product.Product
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.services.ProductService
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration
 import org.springframework.data.domain.Page
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -15,7 +14,6 @@ import java.util.*
 
 @RestController
 @Transactional
-@EnableAutoConfiguration
 @CrossOrigin(origins = ["*"], allowedHeaders = ["*"])
 class ProductController {
 

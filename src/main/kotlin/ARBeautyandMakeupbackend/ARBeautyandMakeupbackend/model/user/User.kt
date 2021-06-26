@@ -9,6 +9,7 @@ import javax.persistence.*
 
 @Entity
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
+@Table(name = "users")
 abstract class User {
 
 

@@ -29,8 +29,12 @@ dependencies {
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("javax.xml.bind:jaxb-api:2.3.0")
 	implementation("com.mercadopago:sdk-java:1.9.1")
+	implementation("org.postgresql:postgresql:42.2.22")
+	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+	implementation("com.zaxxer:HikariCP:4.0.3")
+
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
-	runtimeOnly("com.h2database:h2")
+	runtimeOnly("org.postgresql:postgresql")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.springframework.security:spring-security-test")
 }

@@ -2,6 +2,7 @@ package ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.user
 
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.purchase.Purchase
 import java.time.LocalDate
+import java.time.LocalDateTime
 import javax.persistence.*
 
 @Entity
