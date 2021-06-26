@@ -9,7 +9,7 @@ class ProductBuilder {
     private var name:String = "Crema desmasquillante"
     private var price:Double = 100.00
     private var category:Category = Category.Cremas
-    private var photo:String = ""
+    private var photo:String = "http://d3ugyf2ht6aenh.cloudfront.net/stores/887/684/products/espuma-promoter1-0e13680cbb79101ffc16166887759909-640-0.jpg"
 
 
     companion object {

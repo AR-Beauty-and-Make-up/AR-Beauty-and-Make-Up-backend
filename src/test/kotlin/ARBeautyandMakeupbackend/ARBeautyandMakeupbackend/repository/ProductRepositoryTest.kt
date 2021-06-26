@@ -7,11 +7,15 @@ import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
 import org.springframework.test.context.junit4.SpringRunner
+import org.springframework.transaction.annotation.Transactional
 
 @RunWith(SpringRunner::class)
 @DataJpaTest
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@Transactional
 class ProductRepositoryTest {
 
     @Autowired
@@ -41,7 +45,7 @@ class ProductRepositoryTest {
 
     @Test
     fun whenWeAskForAllProductsWithACategoryProductsRepositoryReturnsAListWithAllProductsWithThatCategory(){
-        val cateogry ="Cremas"
+        val cateogry = Category.Cremas
         val aProduct = ProductBuilder.aProduct().build()
         val anotherProduct = ProductBuilder.aProduct().withName("Agua Micelar").build()
         val productWithDiferentCategory = ProductBuilder.aProduct().withCategory(Category.Maquillaje).build()
@@ -49,7 +53,7 @@ class ProductRepositoryTest {
         productRepository.save(aProduct)
         productRepository.save(anotherProduct)
 
-        val retrievedProductList = productRepository.findAllByACategory(cateogry)
+        val retrievedProductList = productRepository.findAllByCategory(cateogry)
         Assert.assertEquals(2, retrievedProductList.size)
         Assert.assertFalse(retrievedProductList.contains(productWithDiferentCategory))
     }

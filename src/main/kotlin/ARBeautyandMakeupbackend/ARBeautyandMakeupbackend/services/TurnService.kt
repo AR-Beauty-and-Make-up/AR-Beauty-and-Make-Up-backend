@@ -1,39 +1,44 @@
 package ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.services
 
 
+import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.handlers.BadRequestException
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.turn.Turn
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.persistence.TurnRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import java.time.LocalDate
+import java.time.LocalDateTime
 
 @Service
-class TurnService : ITurnService{
+class TurnService {
 
     @Autowired
     lateinit var turnRepository: TurnRepository
 
-    override fun getTurns(): List<Turn> {
+    fun getTurns(): List<Turn> {
         return turnRepository.findAll()
     }
 
-    override fun addTurn(aTurn: Turn): Turn {
-
+    fun addTurn(aTurn: Turn): Turn {
+        canAddTurn(aTurn.date)
         return turnRepository.save(aTurn)
     }
 
-    override fun find(id: Long): Turn {
+    fun find(id: Long): Turn {
 
         return turnRepository.findById(id).get()
     }
 
-    override fun findAllByDate(date: LocalDate): List<Turn> {
+    fun findAllByDate(date: LocalDate): List<Turn> {
         return turnRepository.findAllByDate(date)
     }
 
-    override fun updateTurn(id: Long, aTurn: Turn): Turn {
+    fun updateTurn(id: Long, aTurn: Turn): Turn {
         val retrievedTurn: Turn = this.find(id)
 
+        if(retrievedTurn.date != aTurn.date){
+            canAddTurn(aTurn.date)
+        }
         retrievedTurn.clientName = aTurn.clientName
         retrievedTurn.date = aTurn.date
         retrievedTurn.service = aTurn.service
@@ -42,12 +47,18 @@ class TurnService : ITurnService{
         return turnRepository.save(retrievedTurn)
     }
 
-    override fun deleteTurn(aTurn: Turn) {
+    fun deleteTurn(aTurn: Turn) {
         turnRepository.delete(aTurn)
     }
 
-    override fun getDates(): List<String> {
+    fun getDates(): List<String> {
         return turnRepository.getDates()
+    }
+
+    private fun canAddTurn(aDate: LocalDateTime) {
+        if (getTurns().stream().anyMatch { turn -> turn.date == aDate }) {
+            throw BadRequestException("A turn already exisist on this date")
+        }
     }
 
 

@@ -2,17 +2,18 @@ package ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.repository
 
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.builders.ProductBuilder
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.persistence.ProductPaginatedRepository
-import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.persistence.ProductRepository
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
 import org.springframework.data.domain.PageRequest
 import org.springframework.test.context.junit4.SpringRunner
 
 @RunWith(SpringRunner::class)
 @DataJpaTest
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 class ProductPaginatedRepositoryTest {
     @Autowired
     lateinit var productPaginatedRepository : ProductPaginatedRepository

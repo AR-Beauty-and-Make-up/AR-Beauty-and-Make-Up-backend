@@ -1,10 +1,10 @@
 package ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.user
 
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.builders.UserBuilder
+import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.purchase.Purchase
 import org.junit.Assert
 import org.junit.Test
 import java.time.LocalDate
-import java.time.LocalDateTime
 
 
 class UserTest {
@@ -37,12 +37,6 @@ class UserTest {
     }
 
     @Test
-    fun aUserClientHasOrders(){
-        val aUser  = UserBuilder.aUser().build() as ClientUser
-        Assert.assertEquals(aUser.orders.size, 0)
-    }
-
-    @Test
     fun aUserHasAEmail(){
         val aEmail = "email"
         val aUser = UserBuilder.aUser().withEmail(aEmail).build()
@@ -68,5 +62,32 @@ class UserTest {
         val anAddress = "Calle falsa 123, Bernal, Buenos Aires (1878)"
         val aUser = UserBuilder.aUser().withAddress(anAddress).build()
         Assert.assertEquals(aUser.address, anAddress)
+    }
+
+    @Test
+    fun aUserHasAPhoto(){
+        val aPhoto = "https://scontent.feze12-1.fna.fbcdn.net/v/t1.6435-9/42743411_10217402236033253_5298019150923300864_n.jpg?_nc_cat=102&ccb=1-3&_nc_sid=09cbfe&_nc_eui2=AeHfxPwmHPJiM33kjui7QZ8J5GW77mO_KxPkZbvuY78rEwUyPMWjEPXhLUxOX8atDh0&_nc_ohc=ViXyES6I23kAX8t8hi3&_nc_ht=scontent.feze12-1.fna&oh=08e0bf940508955c0a61f65bc06e8b58&oe=60D40A97"
+        val aUser = UserBuilder.aUser().withPhoto(aPhoto).build()
+        Assert.assertEquals(aUser.photo, aPhoto)
+    }
+
+    @Test
+    fun aUserHasAListOfPurchases(){
+        val aPurchase = Purchase(LocalDate.now(), mutableSetOf())
+        val purchases = mutableSetOf(aPurchase)
+        val aUser = UserBuilder.aUser().withPurchases(purchases).build()
+        Assert.assertEquals(aUser.purchases.size, 1)
+    }
+
+    @Test
+    fun aPurchaseWasAddedToUser() {
+        val aUser = UserBuilder.aUser().withPurchases(mutableSetOf()).build()
+        Assert.assertEquals(aUser.purchases.size, 0)
+
+        val aPurchase = Purchase(LocalDate.now(), mutableSetOf())
+
+        aUser.addPurchase(aPurchase)
+
+        Assert.assertEquals(aUser.purchases.size, 1)
     }
 }

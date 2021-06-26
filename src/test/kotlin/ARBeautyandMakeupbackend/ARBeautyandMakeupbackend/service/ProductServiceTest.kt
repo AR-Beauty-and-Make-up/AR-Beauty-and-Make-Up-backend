@@ -12,16 +12,16 @@ import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
 import org.mockito.junit.MockitoJUnitRunner
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.data.domain.PageImpl
-import org.springframework.data.domain.PageRequest
-import org.springframework.data.domain.Pageable
-import org.springframework.data.domain.Sort
+import org.springframework.transaction.annotation.Transactional
 import java.util.*
 
 
 @SpringBootTest
 @RunWith(MockitoJUnitRunner::class)
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@Transactional
 class ProductServiceTest {
 
     @Mock
@@ -61,7 +61,7 @@ class ProductServiceTest {
     @Test
     fun whenWeAskProductServiceForAllProductsWithACategoryReturnsAListOfProduct() {
         val listOfProductsWithDifrentCategory = ProductBuilder.productListWithDifrentCategory()
-        `when`(productRepositoryMock.findAllByACategory("Cremas")).thenReturn(listOfProductsWithDifrentCategory)
+        `when`(productRepositoryMock.findAllByCategory(Category.Cremas)).thenReturn(listOfProductsWithDifrentCategory)
 
         Assert.assertEquals(listOfProductsWithDifrentCategory.size, productService.findAllByACategory(Category.Cremas).size)
     }
