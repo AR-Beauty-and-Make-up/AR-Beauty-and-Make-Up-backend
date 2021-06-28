@@ -57,7 +57,7 @@ class TurnService {
 
     private fun canAddTurn(aDate: LocalDateTime) {
         if (getTurns().stream().anyMatch { turn -> turn.date == aDate }) {
-            throw BadRequestException("A turn already exisist on this date")
+            throw BadRequestException("El turno ingresado ya se encuentra ocupado. Intente nuevamente")
         }
     }
 
