@@ -2,6 +2,7 @@ package ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.services
 
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.handlers.NotFoundException
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.handlers.BadRequestException
+import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.purchase.Purchase
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.user.AdminUser
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.user.ClientUser
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.user.User
@@ -60,5 +61,15 @@ class UserService : UserDetailsService {
     override fun loadUserByUsername(email: String): UserDetails {
         val user = userRepository.findByEmail(email)
         return org.springframework.security.core.userdetails.User(user?.email, user?.password, emptyList())
+    }
+
+    fun getPurchases(id: Long): MutableSet<Purchase> {
+        return (this.getUser(id) as ClientUser).purchases
+    }
+
+    fun addPurchase(id: Long, purchase: Purchase) : User? {
+        var user = this.getUser(id)
+        user.addPurchase(purchase)
+        return this.userRepository.save(user)
     }
 }
