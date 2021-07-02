@@ -1,4 +1,4 @@
-INSERT INTO product (id, category, photo, price, product_name) values
+INSERT INTO PRODUCT (id, category, photo, price, product_name) values
 (1, 'Cremas', 'https://image.jimcdn.com/app/cms/image/transf/dimension=2048x2048:format=jpg/path/sd10c94a28a61d989/image/i0d53a6e6910adf28/version/1564426448/image.jpg', 450.0, 'Body Training - Crema corporal'),
 (2, 'Cremas','https://image.jimcdn.com/app/cms/image/transf/dimension=2048x2048:format=jpg/path/sd10c94a28a61d989/image/ibb02f9cd79ab9020/version/1564156140/image.jpg', 580.0, 'Gold - Crema para Cara' ),
 (3, 'Cremas','http://d3ugyf2ht6aenh.cloudfront.net/stores/887/684/products/espuma-promoter1-0e13680cbb79101ffc16166887759909-640-0.jpg")', 590.0 , 'Gel Lipiador Mandelic' ),
