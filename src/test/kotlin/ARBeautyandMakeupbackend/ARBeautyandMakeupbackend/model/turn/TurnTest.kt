@@ -32,7 +32,7 @@ class TurnTest {
 
     @Test
     fun aTurnHasAClientContactNumber(){
-        val aNumber = 1168686868
+        val aNumber = "1168686868"
         val aTurn = TurnBuilder.aTurn().withContactClient(aNumber).build()
         Assert.assertEquals(aTurn.contactNumber, aNumber)
     }

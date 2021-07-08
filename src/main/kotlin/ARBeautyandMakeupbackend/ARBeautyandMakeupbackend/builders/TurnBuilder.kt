@@ -10,7 +10,7 @@ class TurnBuilder {
     private var client: String = "Lucas Avalos"
     private var date: LocalDateTime = LocalDateTime.of(2021, 4, 20, 16,0,0)
     private var service: Service = Service.MasajeReductor
-    private var contactNumber: Int = 1168686868
+    private var contactNumber: String = "1168686868"
     private var email: String = "lucas@gmail.com"
 
     companion object {
@@ -52,7 +52,7 @@ class TurnBuilder {
         return this
     }
 
-    fun withContactClient(contactNumber: Int): TurnBuilder {
+    fun withContactClient(contactNumber: String): TurnBuilder {
         this.contactNumber = contactNumber
         return this
     }

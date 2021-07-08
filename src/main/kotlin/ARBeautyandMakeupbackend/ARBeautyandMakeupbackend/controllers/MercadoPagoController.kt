@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @Transactional
 @EnableAutoConfiguration
-@CrossOrigin(origins = ["*"], allowedHeaders = ["*"])
+@CrossOrigin(origins = ["http://localhost:3000/**"])
 class MercadoPagoController {
 
 

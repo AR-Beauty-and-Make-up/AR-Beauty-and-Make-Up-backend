@@ -17,7 +17,7 @@ import java.time.LocalDateTime
 @RestController
 @Transactional
 @EnableAutoConfiguration
-
+@CrossOrigin(origins = ["http://localhost:3000/**"])
 class TurnController {
 
     @Autowired

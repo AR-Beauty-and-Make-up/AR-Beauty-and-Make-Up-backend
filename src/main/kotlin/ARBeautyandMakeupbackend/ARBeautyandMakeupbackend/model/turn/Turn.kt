@@ -17,11 +17,11 @@ open class Turn{
     open var date: LocalDateTime
     open var clientName: String
     open var service: Service
-    open var contactNumber: Int
+    open var contactNumber: String
     open var email: String
 
 
-    constructor(client: String, @JsonProperty("date") aDate: LocalDateTime, aService: Service, aNumber: Int, aEmail: String) {
+    constructor(client: String, @JsonProperty("date") aDate: LocalDateTime, aService: Service, aNumber: String, aEmail: String) {
         this.id = null
         this.date = aDate
         this.clientName = client
@@ -31,7 +31,7 @@ open class Turn{
 
     }
 
-    constructor(id: Long?, client: String, aDate: LocalDateTime, aService: Service, aNumber: Int, aEmail: String)  {
+    constructor(id: Long?, client: String, aDate: LocalDateTime, aService: Service, aNumber: String, aEmail: String)  {
         this.id = id
         this.date = aDate
         this.clientName = client

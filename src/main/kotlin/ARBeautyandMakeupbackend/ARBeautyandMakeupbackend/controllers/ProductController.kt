@@ -14,7 +14,7 @@ import java.util.*
 
 @RestController
 @Transactional
-
+@CrossOrigin(origins = ["http://localhost:3000/**"])
 class ProductController {
 
     @Autowired
