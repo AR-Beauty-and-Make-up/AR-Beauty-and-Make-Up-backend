@@ -14,7 +14,7 @@ import java.util.*
 
 @RestController
 @Transactional
-@CrossOrigin(origins = ["*"], allowedHeaders = ["*"])
+
 class ProductController {
 
     @Autowired

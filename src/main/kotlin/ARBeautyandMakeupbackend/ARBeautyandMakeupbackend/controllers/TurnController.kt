@@ -17,7 +17,7 @@ import java.time.LocalDateTime
 @RestController
 @Transactional
 @EnableAutoConfiguration
-@CrossOrigin(origins = ["*"], allowedHeaders = ["*"])
+
 class TurnController {
 
     @Autowired

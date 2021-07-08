@@ -7,17 +7,21 @@ import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.user.ClientUser
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.user.User
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.persistence.UserRepository
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.context.annotation.Bean
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
 @Service
-class UserService : UserDetailsService {
+class UserService  {
 
     @Autowired
     lateinit var userRepository: UserRepository
 
+    @Autowired
+    lateinit var passwordEncoder: BCryptPasswordEncoder
 
     fun getUser(id: Long) : User {
         return userRepository.findById(id).get()
@@ -25,6 +29,7 @@ class UserService : UserDetailsService {
 
     fun addUser(clientUserUser : ClientUser) : ClientUser {
         canAddUser(clientUserUser.email)
+        clientUserUser.password = this.passwordEncoder.encode(clientUserUser.password)
         return userRepository.save(clientUserUser)
     }
 
@@ -42,8 +47,14 @@ class UserService : UserDetailsService {
         return userRepository.save(adminUser)
     }
 
-    fun authenticateUser(email: String, password: String): User? {
-        return userRepository.findByEmailAndPassword(email, password) ?: throw NotFoundException("Invalid user or password")
+
+
+    fun authenticateUser(email: String, password: String): User {
+        val user = userRepository.findByEmail(email) ?: throw NotFoundException("Invalid user")
+
+        if(!this.passwordEncoder.matches(password, user.password)) {  throw NotFoundException("Invalid password") }
+
+        return user
     }
 
     fun updateUser(id: Long, aUser: ClientUser): User {
@@ -56,9 +67,9 @@ class UserService : UserDetailsService {
         return userRepository.save(retrievedUser)
     }
 
-    @Transactional(readOnly = true)
-    override fun loadUserByUsername(email: String): UserDetails {
-        val user = userRepository.findByEmail(email)
-        return org.springframework.security.core.userdetails.User(user?.email, user?.password, emptyList())
+    @Bean
+    fun passwordEncoder() : BCryptPasswordEncoder {
+        return BCryptPasswordEncoder()
     }
+
 }

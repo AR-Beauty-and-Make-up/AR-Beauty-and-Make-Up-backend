@@ -1,14 +1,19 @@
 package ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.controllers
 
+import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.DatabaseInitializate
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.builders.UserBuilder
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.user.ClientUser
+import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.services.FlushService
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.services.UserService
 import org.json.JSONObject
+import org.junit.After
+import org.junit.Before
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
@@ -28,6 +33,9 @@ class UserControllerTest() {
     @Autowired
     lateinit var mockMvc: MockMvc
 
+    @MockBean
+    lateinit var databaseInitializate: DatabaseInitializate
+
     @Test
     fun askingForAUserByIdReturnsTheUserAnd200Status() {
         val clientUser = UserBuilder.aUser().build()
@@ -39,11 +47,10 @@ class UserControllerTest() {
             .andExpect(MockMvcResultMatchers.status().isOk)
             .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(MockMvcResultMatchers.jsonPath("$.fullname").value("Lucas Avalos"))
-            .andExpect(MockMvcResultMatchers.jsonPath("$.password").value("Pass1234"))
             .andExpect(MockMvcResultMatchers.jsonPath("$.contactNumber").value("1151214699"))
             .andExpect(MockMvcResultMatchers.jsonPath("$.email").value("lucas@gmail.com"))
             .andExpect(MockMvcResultMatchers.jsonPath("$.isAdmin").value("false"))
-            .andExpect(MockMvcResultMatchers.jsonPath("$.address").value("Calle Falsa 123, Berna, Buenos Aires (1879)"))
+            .andExpect(MockMvcResultMatchers.jsonPath("$.address").value("Calle Falsa 123, Bernal, Buenos Aires (1879)"))
     }
 
     @Test
@@ -75,7 +82,6 @@ class UserControllerTest() {
             .content(body.toString()))
             .andExpect(MockMvcResultMatchers.status().isOk)
             .andExpect(MockMvcResultMatchers.jsonPath("$.fullname").value("Belen Amat"))
-            .andExpect(MockMvcResultMatchers.jsonPath("$.password").value("belu123"))
             .andExpect(MockMvcResultMatchers.jsonPath("$.contactNumber").value("1151214699"))
             .andExpect(MockMvcResultMatchers.jsonPath("$.email").value("beluamat@gmail.com"))
             .andExpect(MockMvcResultMatchers.jsonPath("$.isAdmin").value("false"))
@@ -97,8 +103,12 @@ class UserControllerTest() {
 
     @Test
     fun  aUserIsValidatedIfItsEmailMatchesWithItsPassword(){
-        val user = userService.addUser(UserBuilder.aUser().build())
+        val user = UserBuilder.aUser().build()
+        val password = user.password
+        userService.addUser(user)
+
         val body = userToValidate(user)
+        body.put("password", password)
 
         mockMvc.perform(MockMvcRequestBuilders
             .post("/validateUser")

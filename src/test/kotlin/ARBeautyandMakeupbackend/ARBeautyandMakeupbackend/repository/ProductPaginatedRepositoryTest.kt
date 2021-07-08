@@ -1,13 +1,18 @@
 package ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.repository
 
+import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.DatabaseInitializate
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.builders.ProductBuilder
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.persistence.ProductPaginatedRepository
+import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.services.FlushService
+import org.junit.After
 import org.junit.Assert
+import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
+import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.data.domain.PageRequest
 import org.springframework.test.context.junit4.SpringRunner
 
@@ -17,6 +22,10 @@ import org.springframework.test.context.junit4.SpringRunner
 class ProductPaginatedRepositoryTest {
     @Autowired
     lateinit var productPaginatedRepository : ProductPaginatedRepository
+
+    @MockBean
+    lateinit var databaseInitializate: DatabaseInitializate
+
 
     @Test
     fun productRepositorySaveAndRetriveAListOfProducts(){
