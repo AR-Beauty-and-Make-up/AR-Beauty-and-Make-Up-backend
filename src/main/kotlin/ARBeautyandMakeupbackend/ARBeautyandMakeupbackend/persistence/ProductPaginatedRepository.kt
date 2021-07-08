@@ -5,9 +5,4 @@ import org.springframework.data.repository.PagingAndSortingRepository
 import org.springframework.stereotype.Repository
 
 @Repository
-interface ProductPaginatedRepository : PagingAndSortingRepository<Product, Long> {
-
-
-
-
-}
+interface ProductPaginatedRepository : PagingAndSortingRepository<Product, Long>

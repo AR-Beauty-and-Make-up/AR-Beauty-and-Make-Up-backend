@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*
 @RestController
 @Transactional
 @EnableAutoConfiguration
-@CrossOrigin(origins = ["*"], allowedHeaders = ["*"])
+
 class UserController {
 
     @Autowired
@@ -40,12 +40,6 @@ class UserController {
     fun createUser(@RequestBody aUser: ClientUser): ResponseEntity<ClientUser> {
         val savedUser: ClientUser = userService.addUser(aUser)
         return ResponseEntity.status(HttpStatus.OK).body(savedUser)
-    }
-
-    @RequestMapping("/validateUser", method = [RequestMethod.POST])
-    fun validateUser(@RequestBody validationUserDTO: ValidationUserDTO): ResponseEntity<User>{
-        val aUser = userService.authenticateUser(validationUserDTO.getEmail()!!, validationUserDTO.getPassword()!!)
-        return ResponseEntity.status(HttpStatus.OK).body(aUser)
     }
 
     @RequestMapping("/updateUser/{id}", method = [RequestMethod.PUT])

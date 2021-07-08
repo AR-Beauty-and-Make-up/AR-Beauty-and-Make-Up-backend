@@ -3,8 +3,12 @@ package ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.user
 
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.purchase.Purchase
 import com.fasterxml.jackson.annotation.JsonAutoDetect
+import com.fasterxml.jackson.annotation.JsonFormat
+import com.fasterxml.jackson.annotation.JsonIgnore
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import java.time.LocalDate
 import javax.persistence.*
+
 
 
 @Entity
@@ -20,6 +24,7 @@ abstract class User {
     open var photo: String?
     open var fullname: String
     open var password: String
+    @JsonFormat(pattern="yyyy-MM-dd")
     open var dateOfBirth: LocalDate?
     open var contactNumber: Int?
     open var address: String?
@@ -29,7 +34,9 @@ abstract class User {
     open var isAdmin: Boolean
 
 
+
     constructor(photo: String?, fullName: String, password: String, email: String, dateOfBirth: LocalDate?, contactNumber: Int?, address: String?) {
+
         this.id = null
         this.photo = photo
         this.fullname = fullName
@@ -43,6 +50,7 @@ abstract class User {
     }
 
     constructor(id: Long?, photo: String?, fullName: String, password: String,email: String, dateOfBirth: LocalDate?, contactNumber: Int?, address: String?) {
+
         this.id = id
         this.photo = photo
         this.fullname = fullName

@@ -27,7 +27,8 @@ class UserBuilder {
     private var email: String = "lucas@gmail.com"
     private var dateOfBirth: LocalDate = LocalDate.of(1994,3,12)
     private var contactNumber: Int = 1151214699
-    private var address: String = "Calle Falsa 123, Berna, Buenos Aires (1879)"
+
+    private var address: String = "Calle Falsa 123, Bernal, Buenos Aires (1879)"
     private var purchases: MutableSet<Purchase> = mutableSetOf(
             PurchaseBuilder.aPurchase().withDate(LocalDate.now().minusDays(2)).withPurchaseItems(setOf(
                     ItemPurchase(productLabial30, 2),
