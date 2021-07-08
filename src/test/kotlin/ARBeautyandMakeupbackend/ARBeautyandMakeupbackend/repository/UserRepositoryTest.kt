@@ -2,6 +2,7 @@ package ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.repository
 
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.DatabaseInitializate
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.builders.UserBuilder
+import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.user.ClientUser
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.model.user.User
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.persistence.UserRepository
 import ARBeautyandMakeupbackend.ARBeautyandMakeupbackend.services.FlushService
@@ -55,7 +56,7 @@ class UserRepositoryTest {
         val clientUser: User = UserBuilder.aUser().build()
         userRepository.save(clientUser)
 
-        val retrievedClientUser: User = userRepository.findById(clientUser.id!!).get()
+        val retrievedClientUser: ClientUser = (userRepository.findById(clientUser.id!!).get()) as ClientUser
         retrievedClientUser.fullname = "Lucas Emiliano Avalos"
 
         userRepository.save(retrievedClientUser)

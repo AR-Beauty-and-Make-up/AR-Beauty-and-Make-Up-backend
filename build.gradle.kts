@@ -17,7 +17,7 @@ repositories {
 }
 
 dependencies {
-	compile("org.springframework.boot:spring-boot-starter-aop")
+	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-mail")
 	implementation("org.springframework.boot:spring-boot-starter-security")
 	implementation("org.springframework.boot:spring-boot-starter-web")
@@ -27,6 +27,8 @@ dependencies {
     implementation("junit:junit:4.12")
 	implementation("io.jsonwebtoken:jjwt:0.7.0")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+	implementation("javax.xml.bind:jaxb-api:2.3.0")
+	implementation("com.mercadopago:sdk-java:1.9.1")
 	implementation("org.postgresql:postgresql:42.2.22")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("com.zaxxer:HikariCP:4.0.3")
