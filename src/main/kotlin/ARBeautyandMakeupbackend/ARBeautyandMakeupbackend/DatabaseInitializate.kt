@@ -35,12 +35,12 @@ class DatabaseInitializate : CommandLineRunner {
 
         flushService.deleteAll()
 
-        val turnLucas = Turn("Lucas Avalos", LocalDateTime.of(2021, 6, 4, 9, 0), Service.Mesoterapia, 123456789, "lucas@gmail.com")
-        val turnLuciana = Turn("Luciana Alonso", LocalDateTime.of(2021, 4, 20, 10, 30), Service.MasajeReductor, 1122334455, "luciana@gmail.com")
-        val turnBelen = Turn("Belen Amat", LocalDateTime.of(2021, 4, 20, 15, 0), Service.Maquillaje, 987654321, "belen@gmail.com")
-        val turnMicaela = Turn("Micaela Alonso", LocalDateTime.of(2021, 4, 26, 15, 0,0), Service.Mesoterapia, 123456789, "mica@gmail.com")
-        val turnFrancisco = Turn("Francisco Perez", LocalDateTime.of(2021, 4, 20, 13, 30), Service.MasajeReductor, 123456789, "fran@gmail.com")
-        val turnNicolas = Turn("Nicolas Rodriguez", LocalDateTime.of(2021, 4, 26, 16, 30), Service.Ultracavitacion, 123456789, "nico@gmail.com")
+        val turnLucas = Turn("Lucas Avalos", LocalDateTime.of(2021, 6, 4, 9, 0), Service.Mesoterapia, "123456789", "lucas@gmail.com")
+        val turnLuciana = Turn("Luciana Alonso", LocalDateTime.of(2021, 4, 20, 10, 30), Service.MasajeReductor, "1122334455", "luciana@gmail.com")
+        val turnBelen = Turn("Belen Amat", LocalDateTime.of(2021, 4, 20, 15, 0), Service.Maquillaje, "987654321", "belen@gmail.com")
+        val turnMicaela = Turn("Micaela Alonso", LocalDateTime.of(2021, 4, 26, 15, 0,0), Service.Mesoterapia, "123456789", "mica@gmail.com")
+        val turnFrancisco = Turn("Francisco Perez", LocalDateTime.of(2021, 4, 20, 13, 30), Service.MasajeReductor, "123456789", "fran@gmail.com")
+        val turnNicolas = Turn("Nicolas Rodriguez", LocalDateTime.of(2021, 4, 26, 16, 30), Service.Ultracavitacion, "123456789", "nico@gmail.com")
 
         turnService.addTurn(turnLucas)
         turnService.addTurn(turnLuciana)
@@ -99,7 +99,7 @@ class DatabaseInitializate : CommandLineRunner {
 
 
 
-        val photo = "https://scontent.feze12-1.fna.fbcdn.net/v/t1.6435-9/42743411_10217402236033253_5298019150923300864_n.jpg?_nc_cat=102&ccb=1-3&_nc_sid=09cbfe&_nc_eui2=AeHfxPwmHPJiM33kjui7QZ8J5GW77mO_KxPkZbvuY78rEwUyPMWjEPXhLUxOX8atDh0&_nc_ohc=z0Dky4E7oMUAX_-Lomu&_nc_ht=scontent.feze12-1.fna&oh=09d27eedce44f332a1378c2ccbec7935&oe=60E3DC97"
+        val photo = "https://scontent.feze12-1.fna.fbcdn.net/v/t1.6435-9/42743411_10217402236033253_5298019150923300864_n.jpg?_nc_cat=102&ccb=1-3&_nc_sid=09cbfe&_nc_eui2=AeHfxPwmHPJiM33kjui7QZ8J5GW77mO_KxPkZbvuY78rEwUyPMWjEPXhLUxOX8atDh0&_nc_ohc=6rvKlENqNucAX-PLAlf&_nc_ht=scontent.feze12-1.fna&oh=256100411883208c9f9aa6b506d48299&oe=60EBC597"
         val user = UserBuilder.aUser().withPhoto(photo).build()
         val anotherUser = UserBuilder.aUser().withFullname("Luciana Alonso").withEmail("luciana@gamil.com").withConcatNumber(1144778899).build()
         val admin = UserBuilder.aUser().withFullname("Andrea Rudi").withConcatNumber(1162434990).withEmail("andrearudi@gmail.com").buildAdmin()

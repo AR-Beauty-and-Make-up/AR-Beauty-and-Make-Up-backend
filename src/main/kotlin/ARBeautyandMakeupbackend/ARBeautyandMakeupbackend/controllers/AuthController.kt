@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse
 
 @RestController
 @Transactional
+@CrossOrigin(origins = ["http://localhost:3000/**"])
 class AuthController {
 
     @Autowired

@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*
 @RestController
 @Transactional
 @EnableAutoConfiguration
-
+@CrossOrigin(origins = ["http://localhost:3000/**"])
 class UserController {
 
     @Autowired

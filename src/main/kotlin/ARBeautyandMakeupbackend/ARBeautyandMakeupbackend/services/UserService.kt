@@ -45,6 +45,7 @@ class UserService  {
     }
 
     fun addAdminUser(adminUser: AdminUser): AdminUser {
+        adminUser.password = this.passwordEncoder.encode(adminUser.password)
         return userRepository.save(adminUser)
     }
 

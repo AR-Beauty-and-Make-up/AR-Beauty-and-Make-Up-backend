@@ -65,7 +65,7 @@ class TurnControllerTest {
 
     @Test
     fun ifWeEditATurnReturnsTheUpdatedTurn(){
-        val aTurn = TurnBuilder.aTurn().withId(1).withDate(LocalDateTime.of(2021, 7, 4, 9, 0)).withContactClient(1177889944).build()
+        val aTurn = TurnBuilder.aTurn().withId(1).withDate(LocalDateTime.of(2021, 7, 4, 9, 0)).withContactClient("1177889944").build()
 
         val savedTurn = this.turnService.addTurn(aTurn)
 
@@ -87,7 +87,7 @@ class TurnControllerTest {
     @Test
     fun ifWeDeleteATurnReturnsStatus200(){
 
-        val aTurn = TurnBuilder.aTurn().withId(1).withDate(LocalDateTime.of(2021, 7, 4, 9, 0)).withContactClient(1177889944).build()
+        val aTurn = TurnBuilder.aTurn().withId(1).withDate(LocalDateTime.of(2021, 7, 4, 9, 0)).withContactClient("1177889944").build()
 
         val savedTurn = this.turnService.addTurn(aTurn)
 
