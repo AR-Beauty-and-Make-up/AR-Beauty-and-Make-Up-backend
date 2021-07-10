@@ -40,9 +40,9 @@ class MercadoPagoController {
         }
 
         val backUrls = BackUrls(
-                "http://localhost:3000/success",
-                "http://localhost:3000/pending",
-                "http://localhost:3000/check-out")
+                "http://localhost:3000/postpayment",
+                "http://localhost:3000/postpayment",
+                "http://localhost:3000/postpayment")
 
         preference.backUrls = backUrls
         preference.autoReturn = Preference.AutoReturn.approved
