@@ -25,7 +25,7 @@ class AuthController {
 
 
     @PostMapping("/validateUser")
-    fun validateUser(@RequestBody validationUserDTO: ValidationUserDTO, response: HttpServletResponse): ResponseEntity<User> {
+    fun validateUser(@RequestBody validationUserDTO: ValidationUserDTO, response: HttpServletResponse): ResponseEntity<String> {
 
         val user = userService.authenticateUser(validationUserDTO.getEmail()!!, validationUserDTO.getPassword()!!)
 
@@ -34,11 +34,7 @@ class AuthController {
                     .setExpiration(Date(System.currentTimeMillis() + 60 * 24 * 1000 * 7)) // 7 days
                     .signWith(SignatureAlgorithm.HS512, "secret-AR").compact()
 
-        val cookie = Cookie("jwt", jwt)
-        cookie.isHttpOnly = true
-
-        response.addCookie(cookie)
-        return ResponseEntity.status(HttpStatus.OK).body(user)
+        return ResponseEntity.status(HttpStatus.OK).body(jwt)
     }
 
     @GetMapping("/user")
@@ -55,6 +51,7 @@ class AuthController {
     @PostMapping("logout-user")
     fun logout(response: HttpServletResponse): ResponseEntity<Any> {
         val cookie = Cookie("jwt", "")
+
         cookie.maxAge = 0
 
         response.addCookie(cookie)
