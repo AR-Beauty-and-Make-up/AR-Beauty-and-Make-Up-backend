@@ -36,6 +36,7 @@ class AuthController {
 
         val cookie = Cookie("jwt", jwt)
         cookie.isHttpOnly = true
+        response.setHeader("Set-Cookie", "key=value; HttpOnly; SameSite=strict")
 
         response.addCookie(cookie)
         return ResponseEntity.status(HttpStatus.OK).body(user)
@@ -55,6 +56,7 @@ class AuthController {
     @PostMapping("logout-user")
     fun logout(response: HttpServletResponse): ResponseEntity<Any> {
         val cookie = Cookie("jwt", "")
+
         cookie.maxAge = 0
 
         response.addCookie(cookie)
